@@ -1,1 +1,5 @@
-# portfolio
+# Mathew Fleisch's Portfolio
+
+[Portfolio](https://mathew-fleisch.github.io/portfolio/)
+
+My name is Mathew Fleisch, and I am a Full Stack DevOps Engineer from San Francisco. I love working on new projects and features; often times, this means fixing and retrofitting existing products first. Every development team I have worked for, from non-profits to Apple, have all had a finite amount of resources, whether that is infrastructure or developer time. Throughout my career, I have adopted [Larry Wall's philosophy](http://wiki.c2.com/?LazinessImpatienceHubris) and will automate as much as possible, adopting DevOps principles before there was such a title/role. If a task requires human input, I will create a tool or UI that can allow someone closer to the data, to maintain it. This frees up developer time, and reduces the amount of communication necessary to complete common tasks within the organization. In order to optimize limited resources, this philosophy has helped me in each of my roles to maximize my impact on the team. I am also a firm believer that building scalable, stable CI/CD pipelines increases developer velocity and coupled with adequate testing coverage, can increase confidence in secure, scalable production code.
