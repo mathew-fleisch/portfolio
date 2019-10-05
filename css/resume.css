@@ -41,6 +41,9 @@ h2 {
   font-family: 'Saira Extra Condensed', serif;
   font-size: 1.35rem;
 }
+.bolder {
+  font-weight: 700;
+}
 
 .list-social-icons a {
   color: #495057;
