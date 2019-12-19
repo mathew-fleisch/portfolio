@@ -69,7 +69,7 @@
             <a href="mailto:mathew.fleisch@gmail.com">mathew.fleisch@gmail.com</a> ·
             <a href="http://www.mathewfleisch.com/portfolio/MathewFleischResume.pdf" target="_blank">resume<span class="small-text">.pdf</span></a>
           </div>
-          <p class="mb-5">My name is Mathew Fleisch, I am a Full Stack DevOps Engineer from San Francisco and I love working on new projects and features. Often times, this means fixing and retrofitting existing products first. Every development team I have worked for, from non-profits to Apple, have all had a finite amount of resources, whether that is infrastructure or developer time. Throughout my career, I have adopted <a href="http://wiki.c2.com/?LazinessImpatienceHubris" target="_blank">Larry Wall's philosophy</a> and will automate as much as possible, adopting DevOps principles before there was such a title/role. If a task requires human input, I will create a tool or UI that can allow someone closer to the data, to maintain it. This frees up developer time, and reduces the amount of communication necessary to complete common tasks within the organization. In order to optimize limited resources, this philosophy has helped me in each of my roles to maximize my impact on the team. I am also a firm believer that building scalable, stable CI/CD pipelines increases developer velocity and coupled with adequate testing coverage, can increase confidence in secure, scalable production code.</p>
+          <p class="mb-5">My name is Mathew Fleisch, I am a Full Stack DevOps Engineer from San Francisco and I love working on new projects and features. Often times, this means fixing and retrofitting existing products first. Every development team I have worked for, from non-profits to Apple, have all had a finite amount of resources, whether that is infrastructure or developer time. Throughout my career, I have lived by <a href="http://wiki.c2.com/?LazinessImpatienceHubris" target="_blank">Larry Wall's philosophy</a> and will automate as much as possible, adopting DevOps principles before there was such a title/role. I will try to automate any task, if myself, or another coworker must repeat that task more than once. If a task requires human input, I will create a tool or UI that can allow someone closer to the data, to maintain it. This philosophy frees up developer time and reduces the amount of communication necessary to complete common tasks within the organization. I am also a firm believer that building scalable, stable CI/CD pipelines increases developer velocity and coupled with adequate testing coverage, can increase confidence in secure, scalable production code.</p>
           <ul class="list-inline list-social-icons mb-0">
             <li class="list-inline-item">
               <a href="https://www.facebook.com/mathew.fleisch" target="_blank">
@@ -123,8 +123,9 @@
             <div class="resume-content mr-auto">
               <h3 class="mb-0">DevOps Infrastructure Engineer</h3>
               <div class="subheading mb-3"><span class="text-primary bolder">Eaze</span> · November 2018 - Present</div>
-              <p>I had been writing tools for other engineers, while on the back-end team at Eaze, and made the transition to the infrastructure team in November of 2018. In that time I have developed many tools for the engineering department. Focusing on CI/CD pipelines, load testing, and personal development environments, as well as immersing myself into the AWS ecosystem. The technologies I have been using on this team: bash, awscli, boto3, python, javascript, chef, circleci, buildkite, artifactory, ec2, elb/alb, s3, ecs, codedeploy, cloudwatch, cloudformation, terraform, vault, consul and kubernetes.<br /><br />
-              One of the projects I can talk about is an open-source bot I wrote, called <a href="https://github.com/eaze/bashbot" target="_blank">bashbot</a>. It is a chatops tool for slack, that uses a json configuration file to define custom commands. Written primarily in golang, it uses slack's real-time-messaging api to parse each message via regular expression. If a command is detected and matched to an entry in the configuration file, bash commands are executed pertaining to that entry.  Sensitive commands are restricted to private channels, within the configuration file, and members of that private channel can activate that restricted command. Among other commands, a particularly useful command was set up to quickly and securely activate maintenance mode, when necessary. `bashbot maintenance up` and `bashbot maintenance down`</p>
+              <p>I had been writing tools for other engineers, while on the back-end team at Eaze, and made the transition to the infrastructure team in November of 2018. In that time I have developed many tools for the engineering department. Focusing on CI/CD pipelines, load testing, and personal development environments, as well as immersing myself into the AWS ecosystem. The technologies I have been using on this team: bash, awscli, boto3, python, javascript, chef, github-actions, circleci, buildkite, artifactory, ec2, elb/alb, s3, ecs, codedeploy, cloudwatch, cloudformation, terraform, vault, consul, helm and kubernetes.<br /><br />
+              <a href="https://github.com/eaze/bashbot" target="_blank">BashBot</a> is a chatops tool for slack, that uses a json configuration file to define custom commands. Written in golang, it uses slack's real-time-messaging api to parse each message via regular expression. If a command is detected and matched to an entry in the configuration file, bash commands are executed pertaining to that entry. Sensitive commands are restricted to private channels, within the configuration file, and members of that private channel can activate that restricted command. This allows my team to quickly port bash/python scripts/tools that we build for the organization into slack commands, and use slack private channels to restrict access to only members. Among other commands, a particularly useful command was set up to quickly and securely activate maintenance mode, when necessary. `bashbot maintenance up` and `bashbot maintenance down` Typing these keywords into the right private channel triggers the awscli commands to redirect traffic via cloudfront to a maintenance page.<br /><br />
+              While on the infrastructure team, we built reusable terraform to replace the the legacy, snowflake dev/stage/prod environments. This allowed us to create on-demand environments for the developers to have their own personal environment, to test new code in a realistic sandbox. These on-demand environments then are decorated with simulators, tools and tests, to simulate load conditions, and have the controls/levers that operations would have, in  production. We are now in the process of porting the codedeploy/ec2 part of that pipeline, to kubernetes/helm, to speed up deployments on parts of our stack that can be containerized.</p>
             </div>
           </div>
 
@@ -207,12 +208,14 @@
           <div class="subheading mb-3">Tools / Technologies</div>
           <ul>
             <li>AWS (ec2, elb, asg, iam, s3, ecs)</li>
+            <li>docker</li>
+            <li>kubernetes</li>
+            <li>helm</li>
             <li>circleci</li>
             <li>buildkite</li>
             <li>codedeploy</li>
             <li>chef</li>
             <li>jenkins</li>
-            <li>docker</li>
           </ul>
       </section>
 
@@ -223,7 +226,7 @@
           <h2 class="mb-5">Examples</h2>
 
           <ul>
-            <li class="list-item"><a href="https://github.com/eaze/bashbot" target="_blank">bashbot</a> - A chat-ops bot for slack.</a>
+            <li class="list-item"><a href="https://github.com/eaze/bashbot" target="_blank">BashBot</a> - A chat-ops bot for slack.</a>
             <li class="list-item">html crawler -> api -> ui (javascript) · <a href="https://github.com/mathew-fleisch/def-con-schedule" target="_blank">source</a> · <a href="https://i.imgur.com/u1zjQc9.mp4" target="_blank">demo</a></li>
             <li class="list-item">Tetris (micropython) · <a href="https://github.com/mathew-fleisch/dc26-fur-scripts/blob/master/animations/tetris.py" target="_blank">source</a> · <a href="https://i.imgur.com/u1zjQc9.mp4" target="_blank">mp4</a></li>
             <li class="list-item">NPM Top X Package Downloader (javascript) · <a href="https://github.com/mathew-fleisch/homework-node" target="_blank">source</a></li>
