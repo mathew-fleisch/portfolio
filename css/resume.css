@@ -69,6 +69,15 @@ h2 {
   font-weight: 600;
   text-transform: uppercase;
 }
+.skill-container {
+  display:inline-block;
+  margin: 0 20px 0 0;
+  vertical-align:top;
+}
+.left-border {
+  border-left:1px solid #ccc;
+  padding-left:10px;
+}
 
 @media (min-width: 992px) {
   #sideNav {
