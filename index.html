@@ -49,7 +49,7 @@
             <a class="nav-link js-scroll-trigger" href="#skills">Skills</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#examples">Examples</a>
+            <a class="nav-link js-scroll-trigger" href="#examples">Open-Source</a>
           </li>
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#interests">Interests</a>
@@ -200,22 +200,9 @@
         <div class="my-auto">
           <h2 class="mb-5">Skills</h2>
           <div class="skill-container">
-            <div class="subheading mb-3">Programming Languages</div>
-            <ul>
-              <li>bash</li>
-              <li>python</li>
-              <li>golang</li>
-              <li>javascript</li>
-              <li>php</li>
-              <li>perl</li>
-              <li>html</li>
-              <li>css</li>
-            </ul>
-          </div>
-          <div class="skill-container left-border">
             <div class="subheading mb-3">Tools / Technologies</div>
-            <ul>
-              <li>AWS (ec2, elb, asg, iam, s3, ecs)</li>
+            <ul class="left-border">
+              <li>AWS (ec2, elb, asg, iam, s3,<br />ecs, rds, elasticache, route53)</li>
               <li>docker</li>
               <li>kubernetes</li>
               <li>helm</li>
@@ -226,24 +213,50 @@
               <li>jenkins</li>
             </ul>
           </div>
-        </div>
+          <div class="skill-container">
+            <div class="subheading mb-3">Programming Languages</div>
+            <ul class="left-border">
+              <li>bash</li>
+              <li>python</li>
+              <li>golang</li>
+              <li>javascript</li>
+              <li>php</li>
+              <li>perl</li>
+              <li>html</li>
+              <li>css</li>
+            </ul>
+          </div>
+          <div class="skill-container">
+            <div class="subheading mb-3">Databases / Caches</div>
+            <ul class="left-border">
+              <li>Postgres</li>
+              <li>MySql</li>
+              <li>MsSql</li>
+              <li>NoSql</li>
+              <li>SQLite</li>
+              <li>Redis</li>
+              <li>memcache</li>
+            </ul>
+          </div>
       </section>
 
 
 
       <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="examples">
         <div class="my-auto">
-          <h2 class="mb-5">Examples</h2>
+          <h2 class="mb-5">Open-Source Examples</h2>
 
-          These are projects that I've done over the years, for fun and as programming challenges. 
-
+          <strong>Projects</strong>
           <ul>
             <li class="list-item"><a name="bashbot" href="https://github.com/eaze/bashbot" target="_blank">BashBot</a> (GoLang) · <a href="https://github.com/mathew-fleisch/bashbot" target="_blank">source</a><br />
             BashBot uses a json configuration file to define custom commands. Written in golang, it uses slack's real-time-messaging api to parse each message via regular expression. If a command is detected and matched to an entry in the configuration file, bash commands are executed pertaining to that entry. Sensitive commands are restricted to private channels, within the configuration file, and members of that private channel can activate that restricted command. This allows my team to quickly port bash/python scripts/tools that we build for the organization into slack commands, and use slack private channels to restrict access to only members. A particularly useful command was set up to quickly and securely activate maintenance mode, when necessary. `bashbot maintenance up` and `bashbot maintenance down` Typing these keywords into the right private channel triggers the awscli commands to redirect traffic via cloudfront to a maintenance page.<br /><br /></li>
-            <li class="list-item">html crawler -> api -> ui (javascript) · <a href="https://github.com/mathew-fleisch/def-con-schedule" target="_blank">source</a> · <a href="https://mathew-fleisch.github.io/def-con-schedule/" target="_blank">demo</a><br />
-            This project was sparked by attending DEF CON and not liking the given interface for the conference schedule. I wrote this tool to scrape the conference website for data, and then display that data in a more effecient way.<br /><br /></li>
             <li class="list-item">Tetris (python) · <a href="https://github.com/mathew-fleisch/dc26-fur-scripts/blob/master/animations/tetris.py" target="_blank">source</a> · <a href="https://i.imgur.com/u1zjQc9.mp4" target="_blank">mp4</a><br />
             One of the unique aspects of the DEF CON conference is third-party badges that are essentially circuit boards with LEDs and screens on them. One badge has an LED matrix and an accelerometer sensor. I used the on-board interface via a serial connection to port the game Tetris to that platform in Python. <a href="https://i.imgur.com/u1zjQc9.mp4" target="_blank">This video</a> shows Tetris in action.<br /><br /></li>
+          </ul>
+          <strong>Programming Challenges</strong>
+          <ul>
+            <li class="list-item">html crawler -> api -> ui (javascript) · <a href="https://github.com/mathew-fleisch/def-con-schedule" target="_blank">source</a> · <a href="https://mathew-fleisch.github.io/def-con-schedule/" target="_blank">demo</a><br />
+            This project was sparked by attending DEF CON and not liking the given interface for the conference schedule. I wrote this tool to scrape the conference website for data, and then display that data in a more effecient way.<br /><br /></li>
             <li class="list-item">NPM Top X Package Downloader (javascript) · <a href="https://github.com/mathew-fleisch/homework-node" target="_blank">source</a><br />
             This programming challenge was to scrape a website, and download packages based on data, found on the pages.<br /><br /></li>
             <li class="list-item">Secure URL Shortener (php) · <a href="https://github.com/mathew-fleisch/Link-Shrinker" target="_blank">source</a><br />

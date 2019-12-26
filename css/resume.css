@@ -76,7 +76,6 @@ h2 {
 }
 .left-border {
   border-left:1px solid #ccc;
-  padding-left:10px;
 }
 
 @media (min-width: 992px) {
