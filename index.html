@@ -69,7 +69,7 @@
             <a href="mailto:mathew.fleisch@gmail.com">mathew.fleisch@gmail.com</a> ·
             <a href="http://www.mathewfleisch.com/portfolio/MathewFleischResume.pdf" target="_blank">resume<span class="small-text">.pdf</span></a>
           </div>
-          <p class="mb-5">My name is Mathew Fleisch, I am a Full Stack Senior DevOps Engineer from San Francisco and I love working on new projects and features. Often times, this means fixing and retrofitting existing products first. Every development team I have worked for, from non-profits to Apple, have all had a finite amount of resources, whether that is infrastructure or developer time. Throughout my career, I have lived by <a href="http://wiki.c2.com/?LazinessImpatienceHubris" target="_blank">Larry Wall's philosophy</a> and will automate as much as possible, adopting DevOps principles before there was such a title/role. I will try to automate any task, if myself, or another coworker must repeat that task more than once. If a task requires human input, I will create a tool or UI that can allow someone closer to the data, to maintain it. This philosophy frees up developer time and reduces the amount of communication necessary to complete common tasks within the organization. I am also a firm believer that building stable CI/CD pipelines increases developer velocity and coupled with adequate testing coverage, can increase confidence in secure, scalable production code.<br /><a href="https://twitter.com/hashtag/automateallthethings" target="_blank">#AutomateAllTheThings</a></p>
+          <p class="mb-5">My name is Mathew Fleisch, I am a Full Stack, Senior Infrastructure/DevOps Engineer from San Francisco. I love working on new projects and features, and often times, this means fixing and retrofitting existing products first. Every development team I have worked for, from non-profits to Apple, have all had a finite amount of resources, whether that is infrastructure or developer time. Throughout my career, I have lived by <a href="http://wiki.c2.com/?LazinessImpatienceHubris" target="_blank">Larry Wall's philosophy</a> and will automate as much as possible, adopting DevOps principles before there was such a title/role. I try to automate any task, if myself, or another coworker must repeat that task more than once. If a task requires human input, I will create a tool or UI that can allow someone closer to the data, to maintain it. This philosophy frees up developer time and reduces the amount of communication necessary to complete common tasks within the organization. I am also a firm believer that building stable CI/CD pipelines increases developer velocity and coupled with adequate testing coverage, can increase confidence in secure, scalable production code.<br /><a href="https://twitter.com/hashtag/automateallthethings" target="_blank">#AutomateAllTheThings</a></p>
           <ul class="list-inline list-social-icons mb-0">
             <li class="list-inline-item">
               <a href="https://www.facebook.com/mathew.fleisch" target="_blank">
@@ -123,7 +123,7 @@
             <div class="resume-content mr-auto">
               <h3 class="mb-0">Senior DevOps Infrastructure Engineer</h3>
               <div class="subheading mb-3"><span class="text-primary bolder">Sysdig</span> · Feb 2020 - Present</div>
-              I work on developer tools in the infrastructure team at Sysdig, to increase developer velocity. I like to focus on pipelines, automation and integrating tools into chatOps. Recently, I have been working on creating on-demand cloud environments.</p>
+              I work on developer tools in the infrastructure team at Sysdig, to increase developer velocity and productivity. Apart from participating in the on-call rotation for a multi-cloud, multi-region monitoring application, I have helped to migrate, upgrade and stabilize existing tools, and create a few of my own. One of my first projects, was to migrate an on-prem installation of artifactory/jfrog from an ec2/docker/ebs setup to kubernetes/s3/velero. Upgrading to the latest version of artifactory, copying 1TB of artifacts to a new system, while developers continued to use the service, was challenging to coordinate; however, the outcome was successful, and unnoticed by most developers. This change was driven by cost, as the size and number of artifacts grew, the expensive aws-ebs volume had to scale as well. Using an s3 bucket for storage makes the potential artifact storage "unlimited," but required upgrading to the latest version to be a supported feature. I created scripts to copy the data from the ebs volumes to s3, verify parity, and practiced to ensure the migration would be unnoticed.<br />Though Sysdig is primarily a jenkins shop, I have created a number of automations with GitHub Actions to plan/apply terraform, build docker containers, and entire Kops clusters, using GitOps principles. After creating "self-hosted" GitHub Action runners, I created a pipeline that would spin up a kops cluster, deploy a secondary gh-action runner, and use that secondary runner to deploy the full Sysdig stack; all triggered by merging to the main branch of a repository. These "on-demand" environments get route53 cnames to expose the web UI on a subdomain tied to a slack username, and kube-config is also made available for developers to access the cluster via kubectl. <a href="#bashbot">BashBot</a>, an open-source slack bot I wrote, helps to extend the GitOps style pipeline, by triggering creation/deletion of environments, in slack. Developers simply type `bashbot dod-build` to create an on-demand development environment, and `bashbot dod-destroy` to tear it down.</p>
             </div>
           </div>
 
@@ -210,15 +210,17 @@
           <div class="skill-container">
             <div class="subheading mb-3">Tools / Technologies</div>
             <ul class="left-border">
-              <li>AWS (ec2, elb, asg, iam, s3,<br />ecs, rds, elasticache, route53)</li>
+              <li>AWS, GCP, Azure, IBMCloud</li>
               <li>docker</li>
               <li>kubernetes</li>
               <li>helm</li>
+              <li>spinnaker</li>
+              <li>jenkins</li>
+              <li>github actions</li>
               <li>circleci</li>
               <li>buildkite</li>
               <li>codedeploy</li>
               <li>chef</li>
-              <li>jenkins</li>
             </ul>
           </div>
           <div class="skill-container">
@@ -237,12 +239,14 @@
           <div class="skill-container">
             <div class="subheading mb-3">Databases / Caches</div>
             <ul class="left-border">
-              <li>Postgres</li>
-              <li>MySql</li>
-              <li>MsSql</li>
-              <li>NoSql</li>
-              <li>SQLite</li>
-              <li>Redis</li>
+              <li>postgres</li>
+              <li>mysql</li>
+              <li>mssql</li>
+              <li>nosql</li>
+              <li>sqlite</li>
+              <li>cassandra</li>
+              <li>elasticsearch</li>
+              <li>redis</li>
               <li>memcache</li>
             </ul>
           </div>
@@ -256,8 +260,9 @@
 
           <strong>Projects</strong>
           <ul>
-            <li class="list-item" name="bashbot">BashBot (GoLang) · <a href="https://github.com/mathew-fleisch/bashbot" target="_blank">source</a><br />
-            BashBot uses a json configuration file to define custom commands. Written in golang, it uses slack's real-time-messaging api to parse each message via regular expression. If a command is detected and matched to an entry in the configuration file, bash commands are executed pertaining to that entry. Sensitive commands are restricted to private channels, within the configuration file, and members of that private channel can activate that restricted command. This allows my team to quickly port bash/python scripts/tools that we build for the organization into slack commands, and use slack private channels to restrict access to only members. A particularly useful command was set up to quickly and securely activate maintenance mode, when necessary. `bashbot maintenance up` and `bashbot maintenance down` Typing these keywords into the right private channel triggers the awscli commands to redirect traffic via cloudfront to a maintenance page.<br /><br /></li>
+            <li class="list-item" name="bashbot">BashBot (GoLang) · <a href="https://github.com/mathew-fleisch/bashbot" target="_blank">source</a> · <a href="https://hub.docker.com/r/mathewfleisch/bashbot" target="_blank">docker-hub</a><br />
+            BashBot uses a json configuration file to define custom commands. Written in golang, BashBot uses slack's real-time-messaging api (RTM) to parse each message via regular expressions. If a command is detected and matched to an entry in the configuration file, bash commands are executed pertaining to that entry. Sensitive commands can be restricted to private channels, within the configuration file, and members of that private channel can execute that restricted command. This allows infrastructure teams to quickly port the internal tools they create, into version controlled slack commands, and broaden adoption to other coworkers in the organization. An organization can clone the <a href="https://github.com/mathew-fleisch/bashbot" target="_blank">source</a>, download a <a href="https://github.com/mathew-fleisch/bashbot/releases" target="_blank">tarball</a>, or use a pre-built <a href="https://hub.docker.com/r/mathewfleisch/bashbot" target="_blank">container via docker-hub</a> to run BashBot in a varity of different environments. <br /><br /></li>
+
             <li class="list-item" name="bashbot">Timelapse Pipeline (Bash) · <a href="https://github.com/mathew-fleisch/timelapse-pipeline" target="_blank">source</a><br />
             This idea came from a hackathon project I started at Eaze with a Raspberry Pi+camera. The SF Eaze office currently looks over the ferry terminal, on the Embarcadero and I thought the fog and boats would be cool to see as a time lapse. Images are captured at 1fps and stored in an s3 bucket, using the date/timestamp as the filename. A processing pipeline pulls the images down in a circleci container, runs ffmpeg to make a video, and then speeds it up to match a random mp3.<a href="https://www.youtube.com/channel/UCg_RROW8rUh89sWqGaJ8Llg" target="_blank">YouTube Channel</a><br /><strong>Example:</strong><br /><iframe width="560" height="315" src="https://www.youtube.com/embed/un9X0gUwX0I" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><br /><br /></li>
             <li class="list-item">Tetris (python) · <a href="https://github.com/mathew-fleisch/dc26-fur-scripts/blob/master/animations/tetris.py" target="_blank">source</a> · <a href="https://i.imgur.com/u1zjQc9.mp4" target="_blank">mp4</a><br />
