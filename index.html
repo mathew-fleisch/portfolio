@@ -121,17 +121,25 @@
 
           <div class="resume-item d-flex flex-column flex-md-row mb-5">
             <div class="resume-content mr-auto">
-              <h3 class="mb-0">Senior DevOps Infrastructure Engineer</h3>
-              <div class="subheading mb-3"><span class="text-primary bolder">Sysdig</span> · Feb 2020 - Present</div>
-              <p>I work on developer tools in the infrastructure team at Sysdig, to increase developer velocity and productivity. Apart from participating in the on-call rotation for a multi-cloud, multi-region monitoring application, I have helped to migrate, upgrade and stabilize existing tools, and create a few of my own.</p>
-              <p>One of my first projects, was to migrate an on-prem installation of artifactory/jfrog from an ec2/docker/ebs setup to kubernetes/s3/velero. Upgrading to the latest version of artifactory, copying 1TB of artifacts to a new system, while developers continued to use the service, was challenging to coordinate; however, the outcome was successful, and unnoticed by most developers. This change was driven by cost, as the size and number of artifacts grew, the expensive aws-ebs volume had to scale as well. Using an s3 bucket for storage makes the potential artifact storage "unlimited," but required upgrading to the latest version to be a supported feature. I created scripts to copy the data from the ebs volumes to s3, verify parity, and practiced to ensure the migration would be unnoticed.</p>
-              <p>Though Sysdig is primarily a jenkins shop, I have created a number of automations with GitHub Actions to plan/apply terraform, build docker containers, and entire Kops clusters, using GitOps principles. After creating "self-hosted" GitHub Action runners, I created a pipeline that would spin up a kops cluster, deploy a secondary gh-action runner, and use that secondary runner to deploy the full Sysdig stack; all triggered by merging to the main branch of a repository. These "on-demand" environments get route53 cnames to expose the web UI on a subdomain tied to a slack username, and kube-config is also made available for developers to access the cluster via kubectl. <a href="#bashbot" class="js-scroll-trigger">BashBot</a>, an open-source slack bot I wrote, helps to extend the GitOps style pipeline, by triggering creation/deletion of environments, in slack. Developers type `bashbot dod-build` to create an on-demand development environment, and `bashbot dod-destroy` to tear it down.</p>
+              <h3 class="mb-0">Senior Infrastructure Engineer</h3>
+              <div class="subheading mb-3"><span class="text-primary bolder">Workday</span> · March 2021 - Present</div>
+            <p>I am working on the kubernetes platform infrastructure team at workday.</p>
             </div>
           </div>
 
           <div class="resume-item d-flex flex-column flex-md-row mb-5">
             <div class="resume-content mr-auto">
               <h3 class="mb-0">Senior DevOps Infrastructure Engineer</h3>
+              <div class="subheading mb-3"><span class="text-primary bolder">Sysdig</span> · Feb 2020 - 2021</div>
+              <p>I worked on developer tools in the infrastructure team at Sysdig, to increase developer velocity and productivity. Apart from participating in the on-call rotation for a multi-cloud, multi-region monitoring application, I have helped to migrate, upgrade and stabilize existing tools, and create a few of my own.</p>
+              <p>One of my first projects, was to migrate an on-prem installation of artifactory/jfrog from an ec2/docker/ebs setup to kubernetes/s3/velero. Upgrading to the latest version of artifactory, copying 1TB of artifacts to a new system, while developers continued to use the service, was challenging to coordinate; however, the outcome was successful, and unnoticed by most developers. This change was driven by cost, as the size and number of artifacts grew, the expensive aws-ebs volume had to scale as well. Using an s3 bucket for storage makes the potential artifact storage "unlimited," but required upgrading to the latest version to be a supported feature. I created scripts to copy the data from the ebs volumes to s3, verify parity, and practiced to ensure the migration would be unnoticed.</p>
+              <p>Though Sysdig is primarily a jenkins shop, I created a number of automations with GitHub Actions to plan/apply terraform, build docker containers, and entire Kops clusters, using GitOps principles. After creating "self-hosted" GitHub Action runners, I created a pipeline that would spin up a kops cluster, deploy a secondary gh-action runner, and use that secondary runner to deploy the full Sysdig stack; all triggered by merging to the main branch of a repository. These "on-demand" environments get route53 cnames to expose the web UI on a subdomain tied to a slack username, and kube-config is also made available for developers to access the cluster via kubectl. <a href="#bashbot" class="js-scroll-trigger">BashBot</a>, an open-source slack bot I wrote, helps to extend the GitOps style pipeline, by triggering creation/deletion of environments, in slack. Developers type `bashbot dod-build` to create an on-demand development environment, and `bashbot dod-destroy` to tear it down.</p>
+            </div>
+          </div>
+
+          <div class="resume-item d-flex flex-column flex-md-row mb-5">
+            <div class="resume-content mr-auto">
+              <h3 class="mb-0">Senior Infrastructure Engineer</h3>
               <div class="subheading mb-3"><span class="text-primary bolder">Eaze</span> · August 2019 - Jan 2020</div>
               While on the infrastructure team, we built reusable terraform to replace the legacy, snowflake dev/stage/prod environments. This allowed us to create on-demand environments for the developers to have their own personal sandboxes. These on-demand environments are decorated with tools and tests, to simulate load conditions, and have the controls/levers that operations staff would use in production. Developers are able to provision, destroy, and deploy branches, to their own environments, using the chatops bot I wrote (<a href="#bashbot" class="js-scroll-trigger">read more about BashBot</a>). The bot triggers a circleci job, that builds the infrastructure via terraform in about an hour. Before I left, I was in the process of training my team to port the exiting codedeploy/ec2 portion of our pipeline, to kubernetes/helm.</p>
             </div>
@@ -140,7 +148,7 @@
 
           <div class="resume-item d-flex flex-column flex-md-row mb-5">
             <div class="resume-content mr-auto">
-              <h3 class="mb-0">DevOps Infrastructure Engineer</h3>
+              <h3 class="mb-0">Senior Infrastructure Engineer</h3>
               <div class="subheading mb-3"><span class="text-primary bolder">Eaze</span> · November 2018 - August 2019</div>
               <p>I had been writing tools for other engineers, while on the back-end team at Eaze, and made the transition to the infrastructure team in November of 2018. In that time I have developed many tools for the engineering department. Focusing on CI/CD pipelines, load testing, and personal development environments, as well as immersing myself into the AWS ecosystem. The technologies I have been using on this team: bash, awscli, boto3, python, javascript, chef, github-actions, circleci, buildkite, artifactory, ec2, elb/alb, s3, ecs, codedeploy, cloudwatch, cloudformation, terraform, vault, consul, helm and kubernetes.<br /><br />
             </div>
