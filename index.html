@@ -218,20 +218,19 @@
       <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="skills">
         <div class="my-auto">
           <h2 class="mb-5">Skills</h2>
+          I have personal experience with the following tools, technologies, languages and databases.<br /><br />
+                
           <div class="skill-container">
             <div class="subheading mb-3">Tools / Technologies</div>
             <ul class="left-border">
-              <li>AWS, GCP, Azure, IBMCloud</li>
-              <li>docker</li>
-              <li>kubernetes</li>
-              <li>helm</li>
-              <li>spinnaker</li>
-              <li>jenkins</li>
-              <li>github actions</li>
-              <li>circleci</li>
-              <li>buildkite</li>
-              <li>codedeploy</li>
-              <li>chef</li>
+              <li>AWS, GCP, Azure, IBMCloud, On-Prem</li>
+              <li>Terraform, CloudFormation</li>
+              <li>kubernetes/docker: helm, spinnaker,<br />
+                harness, argocd, fluxcd, prometheus,<br />
+                grafana, sysdig/falco</li>
+              <li>jenkins, github-actions, circleci,<br />
+                buildkite, codedeploy, chef, tekton,<br />
+                prow</li>
             </ul>
           </div>
           <div class="skill-container">
@@ -240,7 +239,7 @@
               <li>bash</li>
               <li>python</li>
               <li>golang</li>
-              <li>javascript</li>
+              <li>javascript/node</li>
               <li>php</li>
               <li>perl</li>
               <li>html</li>
@@ -275,7 +274,7 @@
             BashBot uses a json configuration file to define custom commands. Written in golang, BashBot uses slack's real-time-messaging api (RTM) to parse each message via regular expressions. If a command is detected and matched to an entry in the configuration file, bash commands are executed pertaining to that entry. Sensitive commands can be restricted to private channels, within the configuration file, and members of that private channel can execute that restricted command. This allows infrastructure teams to quickly port the internal tools they create, into version controlled slack commands, and broaden adoption to other coworkers in the organization. A slack admin can build from <a href="https://github.com/mathew-fleisch/bashbot" target="_blank">source</a>, download a <a href="https://github.com/mathew-fleisch/bashbot/releases" target="_blank">go-binary</a>, or use a pre-built <a href="https://hub.docker.com/r/mathewfleisch/bashbot" target="_blank">container via docker-hub</a> to run BashBot in a varity of different environments. Automation builds and pushes multi-arch containers to docker hub via github actions.<br /><br /></li>
 
             <li class="list-item" id="bashbot" name="bashbot">FoDBot (python) · <a href="https://github.com/mathew-fleisch/FoDBot-SQL" target="_blank">source</a><br />
-            A community of fans of a Star Trek podcast called the Greatest Generation has a Discord server and developed a Discord bot to play games, and provide other genre specific information. I helped to standardize the monolith python script, into an extensible library, that is now self-hosted in Docker. Future plans include migrating the containers to run on a raspberry pi kubernetes cluster.<br /><br /></li>
+            A community of fans of a Star Trek podcast called the Greatest Generation has a Discord server and developed a Discord bot to play games, and provide other genre specific information. I helped to standardize the monolith python script, into an extensible library, that is now self-hosted in Docker. This application includes a mysql database that is also run in a container. Future plans include migrating the containers to run on a raspberry pi kubernetes cluster.<br /><br /></li>
 
 
             <li class="list-item" id="bashbot" name="bashbot">asdf version manager (bash) · <a href="https://github.com/mathew-fleisch?tab=repositories&q=asdf&type=&language=&sort=" target="_blank">source</a><br />
