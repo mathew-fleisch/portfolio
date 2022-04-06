@@ -274,6 +274,32 @@
             <li class="list-item" id="bashbot" name="bashbot">BashBot (GoLang) · <a href="https://github.com/mathew-fleisch/bashbot" target="_blank">source</a> · <a href="https://hub.docker.com/r/mathewfleisch/bashbot" target="_blank">docker-hub</a><br />
             BashBot uses a json configuration file to define custom commands. Written in golang, BashBot uses slack's real-time-messaging api (RTM) to parse each message via regular expressions. If a command is detected and matched to an entry in the configuration file, bash commands are executed pertaining to that entry. Sensitive commands can be restricted to private channels, within the configuration file, and members of that private channel can execute that restricted command. This allows infrastructure teams to quickly port the internal tools they create, into version controlled slack commands, and broaden adoption to other coworkers in the organization. A slack admin can build from <a href="https://github.com/mathew-fleisch/bashbot" target="_blank">source</a>, download a <a href="https://github.com/mathew-fleisch/bashbot/releases" target="_blank">go-binary</a>, or use a pre-built <a href="https://hub.docker.com/r/mathewfleisch/bashbot" target="_blank">container via docker-hub</a> to run BashBot in a varity of different environments. Automation builds and pushes multi-arch containers to docker hub via github actions.<br /><br /></li>
 
+            <li class="list-item" id="bashbot" name="bashbot">FoDBot (python) · <a href="https://github.com/mathew-fleisch/FoDBot-SQL" target="_blank">source</a><br />
+            A community of fans of a Star Trek podcast called the Greatest Generation has a Discord server and developed a Discord bot to play games, and provide other genre specific information. I helped to standardize the monolith python script, into an extensible library, that is now self-hosted in Docker. Future plans include migrating the containers to run on a raspberry pi kubernetes cluster.<br /><br /></li>
+
+
+            <li class="list-item" id="bashbot" name="bashbot">asdf version manager (bash) · <a href="https://github.com/mathew-fleisch?tab=repositories&q=asdf&type=&language=&sort=" target="_blank">source</a><br />
+              I have contributed to, and created a number of plugins for the <a href="https://asdf-vm.com/" target="_blank">asdf version manager</a> with the goal of ensuring tools I use in self-hosted github action automations run on the raspberry pi (arm64):
+              <ul>
+                <li><a href="https://github.com/mathew-fleisch/asdf-argocd" target="_blank">github.com/mathew-fleisch/asdf-argocd</a></li>
+                <li><a href="https://github.com/mathew-fleisch/asdf-awscli" target="_blank">github.com/mathew-fleisch/asdf-awscli</a></li>
+                <li><a href="https://github.com/mathew-fleisch/asdf-bashbot" target="_blank">github.com/mathew-fleisch/asdf-bashbot</a></li>
+                <li><a href="https://github.com/mathew-fleisch/asdf-cfssl" target="_blank">github.com/mathew-fleisch/asdf-cfssl</a></li>
+                <li><a href="https://github.com/mathew-fleisch/asdf-dockle" target="_blank">github.com/mathew-fleisch/asdf-dockle</a></li>
+                <li><a href="https://github.com/mathew-fleisch/asdf-flux2" target="_blank">github.com/mathew-fleisch/asdf-flux2</a></li>
+                <li><a href="https://github.com/mathew-fleisch/asdf-helm" target="_blank">github.com/mathew-fleisch/asdf-helm</a></li>
+                <li><a href="https://github.com/mathew-fleisch/asdf-helm-cr" target="_blank">github.com/mathew-fleisch/asdf-helm-cr</a></li>
+                <li><a href="https://github.com/mathew-fleisch/asdf-kustomize" target="_blank">github.com/mathew-fleisch/asdf-kustomize</a></li>
+                <li><a href="https://github.com/mathew-fleisch/asdf-loki-logcli" target="_blank">github.com/mathew-fleisch/asdf-loki-logcli</a></li>
+                <li><a href="https://github.com/mathew-fleisch/asdf-mage" target="_blank">github.com/mathew-fleisch/asdf-mage</a></li>
+                <li><a href="https://github.com/mathew-fleisch/asdf-rbac-lookup" target="_blank">github.com/mathew-fleisch/asdf-rbac-lookup</a></li>
+                <li><a href="https://github.com/mathew-fleisch/asdf-shellcheck" target="_blank">github.com/mathew-fleisch/asdf-shellcheck</a></li>
+                <li><a href="https://github.com/mathew-fleisch/asdf-shfmt" target="_blank">github.com/mathew-fleisch/asdf-shfmt</a></li>
+                <li><a href="https://github.com/mathew-fleisch/asdf-tekton-cli" target="_blank">github.com/mathew-fleisch/asdf-tekton-cli</a></li>
+                <li><a href="https://github.com/mathew-fleisch/asdf-velero" target="_blank">github.com/mathew-fleisch/asdf-velero</a></li>
+                <li><a href="https://github.com/mathew-fleisch/asdf-yq" target="_blank">github.com/mathew-fleisch/asdf-yq</a></li>
+              </ul><br /><br /></li>
+
             <li class="list-item" id="build-local-environments" name="build-local-environments">Build/Local Environments · <a href="https://github.com/mathew-fleisch/github-actions-runner" target="_blank">github-actions-runner source</a> · <a href="https://github.com/mathew-fleisch/docker-dev-env" target="_blank">docker-dev-env source</a><br />
               The <a href="https://github.com/mathew-fleisch/docker-dev-env/" target="_blank">docker-dev-env</a> and <a href="https://github.com/mathew-fleisch/github-actions-runner/" target="_blank">github-actions-runner</a> are similar in that they both pre-install tools that are useful for infrastructer/devops tasks, but the github-actions-runner also includes the runner agent to register a self-hosted github-action runner. I did a post about the <a href="https://github.com/mathew-fleisch/blog/blob/main/blog/2021-04-07/dev-in-a-can.md" target="_blank">docker-dev-env</a> and <a href="https://github.com/mathew-fleisch/blog/blob/main/blog/2021-05-17/self-hosted-github-action-runners-on-self-hosted-kubernetes-cluster.md" target="_blank">github-actions-runner</a> projects on my <a href="https://github.com/mathew-fleisch/blog/" target="_blank">blog</a>.<br /><br /></li>
 
@@ -294,11 +320,7 @@
           <ul>
             <li class="list-item">html crawler -> api -> ui (javascript) · <a href="https://github.com/mathew-fleisch/def-con-schedule" target="_blank">source</a> · <a href="https://mathew-fleisch.github.io/def-con-schedule/" target="_blank">demo</a><br />
             This project was sparked by attending DEF CON and not liking the given interface for the conference schedule. I wrote this tool to scrape the conference website for data, and then display that data in a more effecient way.<br /><br /></li>
-            <li class="list-item">NPM Top X Package Downloader (javascript) · <a href="https://github.com/mathew-fleisch/homework-node" target="_blank">source</a><br />
-            This programming challenge was to scrape a website, and download packages based on data, found on the pages.<br /><br /></li>
-            <li class="list-item">Secure URL Shortener (php) · <a href="https://github.com/mathew-fleisch/Link-Shrinker" target="_blank">source</a><br />
-            This programming challenge was to create a link shortener, like bit.ly. The added hurdle was to pass links through the https://www.phishtank.com/ api. It comes with a vagrant environment, and runs apache workbench load tests.
-            <br /><br /></li>
+           
             <li class="list-item">Morse Code Game (arduino/c) · <a href="https://github.com/mathew-fleisch/TheHelloWorldMorseCodeGame" target="_blank">source</a><br />
             This program uses Sparkfun's ProtoSnap board or other Arduino board with a button, buzzer, and rgb led attached to the specified pins. The concept of the program is to input morse code via a button, have a function encode, then decode a sequence of 1-5 button presses into an english character. The letter is then printed to the serial monitor and a green light blips, if a character is correctly identified; a red light blips and an error is printed to the serial monitor, if no match was found. To make game around only using the board, a user can spell "hello world" and a different tone will play, as well as a chromatic- like tone-blips as each letter is spelled correctly. If the user spells the target word (target because you the programmer, can change "hello world" to any other string of chars) incorrectly, they have to start at the beginning of the game, with the first letter.<br /><br />
             </li>
@@ -310,10 +332,10 @@
         <div class="my-auto">
           <h2 class="mb-5">Interests</h2>
           <p>When I am not messing with computers in some way, I like to play music, read sci-fi/fantasy, travel and eat great food.</p>
-          <p><strong>Music</strong>: I grew up playing music and have played in performing bands most of my life. Most recently I played piano and saxophone in the skunk pop band <a href="http://www.mathewfleisch.com/ovv/" target="_blank">Our Vinyl Vows</a></p>
+          <p><strong>Music</strong>: I grew up playing music and have played in performing bands most of my life. Most recently I played keyboards and saxophone in the pop punk band <a href="http://www.mathewfleisch.com/ovv/" target="_blank">Our Vinyl Vows</a></p>
           <p><strong>Science Fiction/Fantasy</strong>: My favorite Authors are Robert Jordan, Brandon Sanderson, John Scalzi, Orson Scott Card, Daniel Suarez, James S.A. Corey, and Neal Stephenson. <a href="https://www.goodreads.com/user/show/51571316-mathew" target="_blank">GoodReads Profile</a></p>
           <p><strong>Travel</strong>: I have visited half of the united states and went on <a href="https://imgur.com/gallery/Xb8ubke" target="_blank">safari in Tanzania</a> with my wife.</p>
-          <p><strong>Food</strong>: Whether we are in town or abroad, my wife and I love to eat delicious food. We will go to restaurants or cook various dishes inspired from our families and our travels.</p>
+          <p><strong>Food</strong>: Whether we are in town or abroad, my family and I love to eat delicious food. We will go to restaurants or cook various dishes inspired from our families and our travels.</p>
         </div>
       </section>
 
