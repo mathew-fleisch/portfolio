@@ -23,3 +23,4 @@ jobs:
       run: |
         rm -rf .git ovv
         aws s3 sync ./ s3://mathewfleisch.com --delete
+        aws cloudfront create-invalidation --distribution-id ${{ secrets.DISTRIBUTION_ID }} --paths '/*'
