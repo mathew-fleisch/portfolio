@@ -1,337 +1,455 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mathew Fleisch | Senior Infrastructure Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --primary-dark: #2563eb;
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
+            --bg-main: #ffffff;
+            --bg-secondary: #f9fafb;
+            --border: #e5e7eb;
+            --container-width: 900px;
+        }
 
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    <title>Mathew Fleisch's Developer Portfolio</title>
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            color: var(--text-main);
+            background-color: var(--bg-main);
+            line-height: 1.6;
+            padding-top: 60px;
+        }
 
-    <!-- Bootstrap core CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
 
-    <!-- Custom fonts for this template -->
-    <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/devicons/1.8.0/css/devicons.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css" rel="stylesheet">
+        a:hover {
+            color: var(--primary-dark);
+        }
 
-    <!-- Custom styles for this template -->
-    <link href="css/resume.css" rel="stylesheet">
-    <link rel="shortcut icon" href="favicon.ico" />
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+        }
 
-  </head>
+        nav {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1rem;
+            height: 60px;
+        }
 
-  <body id="page-top">
+        nav .logo {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--text-main);
+        }
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
-      <a class="navbar-brand js-scroll-trigger" href="#page-top">
-        <span class="d-block d-lg-none">Mathew Fleisch · Portfolio</span>
-        <span class="d-none d-lg-block">
-          <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="img/profile.jpg" alt="">
-        </span>
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#about">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#experience">Experience</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#skills">Skills</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#examples">Open-Source</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#interests">Interests</a>
-          </li>
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav ul a {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        nav ul a:hover {
+            color: var(--text-main);
+        }
+
+        section {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 4rem 1rem;
+        }
+
+        .hero {
+            padding: 6rem 1rem;
+            text-align: center;
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+            border: 4px solid var(--primary);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            margin-bottom: 1rem;
+        }
+
+        .hero .accent {
+            color: var(--primary);
+        }
+
+        .hero .subheading {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .resume-btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .resume-btn:hover {
+            background: var(--primary-dark);
+            color: white;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 2.5rem;
+            border-bottom: 2px solid var(--primary);
+            display: inline-block;
+            padding-bottom: 0.25rem;
+        }
+
+        .experience-item {
+            margin-bottom: 3rem;
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .experience-header h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .experience-header .company {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .experience-header .date {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .experience-content p {
+            margin-bottom: 1rem;
+            color: var(--text-muted);
+        }
+
+        .experience-content ul {
+            margin-left: 1.25rem;
+            list-style-type: square;
+            color: var(--text-muted);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category h4 {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            background: var(--bg-secondary);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-card h4 {
+            font-size: 1.125rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .project-card p {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .project-links a {
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-right: 1rem;
+        }
+
+        @media (max-width: 640px) {
+            .hero h1 { font-size: 2.5rem; }
+            .experience-header { flex-direction: column; }
+            .projects-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <nav>
+        <div class="logo">Mathew Fleisch</div>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Open Source</a></li>
         </ul>
-      </div>
     </nav>
+</header>
 
-    <div class="container-fluid p-0">
-
-      <section class="resume-section p-3 p-lg-5 d-flex d-column" id="about">
-        <div class="my-auto">
-          <h1 class="mb-0">Mathew
-            <span class="text-primary">Fleisch</span>
-          </h1>
-          <div class="subheading mb-5">San Francisco · (415) 497-9412 ·
-            <a href="mailto:mathew.fleisch@gmail.com">mathew.fleisch@gmail.com</a> ·
-            <a href="MathewFleischResume.pdf" target="_blank">resume<span class="small-text">.pdf</span></a> ·
-            <a href="https://github.com/mathew-fleisch/blog">Blog</a>
-          </div>
-          <p class="mb-5">My name is Mathew Fleisch, and I am a Senior Infrastructure/DevOps Engineer from San Francisco. I love working on new projects and features, and often times, this means fixing and retrofitting existing products first. Every development team I have worked for, from non-profits to large corporations, have all had a finite amount of resources, whether that is in the form of time or cost. Throughout my career, I have lived by <a href="http://wiki.c2.com/?LazinessImpatienceHubris" target="_blank">Larry Wall's philosophy</a> and will automate as much as possible, adopting DevOps principles before there was such a title/role. I will try to automate tasks if possible, but if a task requires human input, I will create a tool that can allow someone closer to the data, to maintain it. This philosophy frees up developer time and reduces the amount of communication necessary to complete common tasks within the organization. I am also a firm believer that building stable CI/CD pipelines increases developer velocity and coupled with adequate testing coverage, can increase confidence in secure, scalable production code.<br /><a href="https://twitter.com/hashtag/automateallthethings" target="_blank">#AutomateAllTheThings</a></p>
-          <ul class="list-inline list-social-icons mb-0">
-            <li class="list-inline-item">
-              <a href="https://www.facebook.com/mathew.fleisch" target="_blank">
-                <span class="fa-stack fa-lg">
-                  <i class="fa fa-circle fa-stack-2x"></i>
-                  <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-                </span>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="https://twitter.com/draxiomatic" target="_blank">
-                <span class="fa-stack fa-lg">
-                  <i class="fa fa-circle fa-stack-2x"></i>
-                  <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                </span>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="https://instagram.com/feartheredbeard/" target="_blank">
-                <span class="fa-stack fa-lg">
-                  <i class="fa fa-circle fa-stack-2x"></i>
-                  <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
-                </span>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="https://www.linkedin.com/pub/mathew-fleisch/13/610/57a" target="_blank">
-                <span class="fa-stack fa-lg">
-                  <i class="fa fa-circle fa-stack-2x"></i>
-                  <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
-                </span>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="https://github.com/mathew-fleisch" target="_blank">
-                <span class="fa-stack fa-lg">
-                  <i class="fa fa-circle fa-stack-2x"></i>
-                  <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                </span>
-              </a>
-            </li>
-          </ul>
+<main>
+    <section id="about" class="hero">
+        <img src="img/profile.jpg" alt="Mathew Fleisch" class="profile-img">
+        <h1>Mathew <span class="accent">Fleisch</span></h1>
+        <p class="subheading">Senior Infrastructure & DevOps Engineer from San Francisco</p>
+        <p style="max-width: 700px; margin: 0 auto 2.5rem; color: var(--text-muted);">
+            Focused on automation, CI/CD, and building robust developer tooling. 
+            I advocate for Larry Wall's philosophy of automation to free up developer time 
+            and believe stable pipelines combined with solid testing are essential for 
+            delivering secure, scalable code.
+        </p>
+        <div class="social-links">
+            <a href="https://github.com/mathew-fleisch" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://linkedin.com/pub/mathew-fleisch/13/610/57a" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="https://twitter.com/draxiomatic" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="mailto:mathew.fleisch@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
         </div>
-      </section>
+        <a href="MathewFleischResume.pdf" target="_blank" class="resume-btn"><i class="fas fa-file-pdf"></i> View Resume</a>
+    </section>
 
-      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="experience">
-        <div class="my-auto">
-          <h2 class="mb-5">Experience</h2>
+    <section id="experience">
+        <h2 class="section-title">Experience</h2>
 
-          <div class="resume-item d-flex flex-column flex-md-row mb-5">
-            <div class="resume-content mr-auto">
-              <h3 class="mb-0">Senior Infrastructure Engineer</h3>
-              <div class="subheading mb-3"><span class="text-primary bolder">Workday</span> · March 2021 - Present</div>
-            <p>The "Scylla" team at Workday maintains a platform for automating the deployment of the Workday stack on Kubernetes clusters in multi-cloud environments. This involves maintaining a number of custom built Kubernetes operators, allowing service teams to provision cloud resources (storage buckets and databases) and the automation to continuously deploy a stable product to our customers. My team has built a suite of end-to-end tests that allow us to simultaneously validate the expected functionality of each microservice and have been designed to be cloud agnostic.</p>
+        <!-- Workday - PIE Team -->
+        <div class="experience-item">
+            <div class="experience-header">
+                <h3>Senior Infrastructure Engineer <span class="company">@ Workday (PIE Team)</span></h3>
+                <span class="date">2024 - Present</span>
             </div>
-          </div>
-
-          <div class="resume-item d-flex flex-column flex-md-row mb-5">
-            <div class="resume-content mr-auto">
-              <h3 class="mb-0">Senior Infrastructure Engineer</h3>
-              <div class="subheading mb-3"><span class="text-primary bolder">Sysdig</span> · Feb 2020 - 2021</div>
-              <p>I worked on developer tools in the infrastructure team at Sysdig, to increase developer velocity and productivity. Apart from participating in the on-call rotation for a multi-cloud, multi-region monitoring application, I have helped to migrate, upgrade and stabilize existing tools, and create a few of my own.</p>
-              <p>One of my first projects, was to migrate an on-prem installation of artifactory/jfrog from an ec2/docker/ebs setup to kubernetes/s3/velero. Upgrading to the latest version of artifactory, copying 1TB of artifacts to a new system, while developers continued to use the service, was challenging to coordinate; however, the outcome was successful, and unnoticed by most developers. This change was driven by cost, as the size and number of artifacts grew, the expensive aws-ebs volume had to scale as well. Using an s3 bucket for storage makes the potential artifact storage "unlimited," but required upgrading to the latest version to be a supported feature. I created scripts to copy the data from the ebs volumes to s3, verify parity, and practiced to ensure the migration would be unnoticed.</p>
-              <p>Though Sysdig is primarily a jenkins shop, I created a number of automations with GitHub Actions to plan/apply terraform, build docker containers, and entire Kops clusters, using GitOps principles. After creating "self-hosted" GitHub Action runners, I created a pipeline that would spin up a kops cluster, deploy a secondary gh-action runner, and use that secondary runner to deploy the full Sysdig stack; all triggered by merging to the main branch of a repository. These "on-demand" environments get route53 cnames to expose the web UI on a subdomain tied to a slack username, and kube-config is also made available for developers to access the cluster via kubectl. <a href="#bashbot" class="js-scroll-trigger">BashBot</a>, an open-source slack bot I wrote, helps to extend the GitOps style pipeline, by triggering creation/deletion of environments, in slack. Developers type `bashbot dod-build` to create an on-demand development environment, and `bashbot dod-destroy` to tear it down.</p>
+            <div class="experience-content">
+                <p>Building scalable abstractions and standardized infrastructure for the Platform Infrastructure Engineering team.</p>
+                <ul>
+                    <li>Developed an abstraction layer for Amazon EKS using Terraform and Cookiecutter to standardize configuration and environment setup.</li>
+                    <li>Engineered cloud-native CI/CD pipelines using Tekton and Argo Workflows for infrastructure and custom API deployments across multiple Kubernetes clusters.</li>
+                </ul>
             </div>
-          </div>
-
-          <div class="resume-item d-flex flex-column flex-md-row mb-5">
-            <div class="resume-content mr-auto">
-              <h3 class="mb-0">Senior Infrastructure Engineer</h3>
-              <div class="subheading mb-3"><span class="text-primary bolder">Eaze</span> · August 2019 - Jan 2020</div>
-              While on the infrastructure team, we built reusable terraform to replace the legacy, snowflake dev/stage/prod environments. This allowed us to create on-demand environments for the developers to have their own personal sandboxes. These on-demand environments are decorated with tools and tests, to simulate load conditions, and have the controls/levers that operations staff would use in production. Developers are able to provision, destroy, and deploy branches, to their own environments, using the chatops bot I wrote (<a href="#bashbot" class="js-scroll-trigger">read more about BashBot</a>). The bot triggers a circleci job, that builds the infrastructure via terraform in about an hour. Before I left, I was in the process of training my team to port the exiting codedeploy/ec2 portion of our pipeline, to kubernetes/helm.</p>
-            </div>
-          </div>
-
-
-          <div class="resume-item d-flex flex-column flex-md-row mb-5">
-            <div class="resume-content mr-auto">
-              <h3 class="mb-0">Infrastructure Engineer</h3>
-              <div class="subheading mb-3"><span class="text-primary bolder">Eaze</span> · November 2018 - August 2019</div>
-              <p>I had been writing tools for other engineers, while on the back-end team at Eaze, and made the transition to the infrastructure team in November of 2018. In that time I have developed many tools for the engineering department. Focusing on CI/CD pipelines, load testing, and personal development environments, as well as immersing myself into the AWS ecosystem. The technologies I have been using on this team: bash, awscli, boto3, python, javascript, chef, github-actions, circleci, buildkite, artifactory, ec2, elb/alb, s3, ecs, codedeploy, cloudwatch, cloudformation, terraform, vault, consul, helm and kubernetes.<br /><br />
-            </div>
-          </div>
-
-
-          <div class="resume-item d-flex flex-column flex-md-row mb-5">
-            <div class="resume-content mr-auto">
-              <h3 class="mb-0">Back-End Services Developer</h3>
-              <div class="subheading mb-3"><span class="text-primary bolder">Eaze</span> · March 2018 - November 2018</div>
-              <p>Working for a start-up means constantly adapting to shifting requirements while making forward progress. In the back-end services team, I have been able to create tools to automate business tasks and help to retrofit a young application to scale efficiently.</p>
-            </div>
-          </div>
-
-          <div class="resume-item d-flex flex-column flex-md-row mb-5">
-            <div class="resume-content mr-auto">
-              <h3 class="mb-0">Full Stack Developer</h3>
-              <div class="subheading mb-3"><span class="text-primary bolder">Apple (marketing)</span> · May 2017 - March 2018</div>
-              <p>I was hired to work in the marketing department to maintain a sunsetting web application that was being rebuilt by another team. I made modifications to make the application more stable, secure and added logging for debugging purposes. I also expanded my role to help maintain an internal content management system.</p>
-            </div>
-          </div>
-
-          <div class="resume-item d-flex flex-column flex-md-row mb-5">
-            <div class="resume-content mr-auto">
-              <h3 class="mb-0">Javascript Developer</h3>
-              <div class="subheading mb-3"><span class="text-primary bolder">Hitachi America</span> · February 2017 - May 2017</div>
-              <p>I was hired for a short contract to work on an IoT analytics platform, using Javascript, NodeJS and Node Red. I wrote a user-interface in NodeJS to integrate an internal tool with Node Red to allow analytics information to be displayed about sensors and device status.</p>
-            </div>
-          </div>
-
-          <div class="resume-item d-flex flex-column flex-md-row mb-5">
-            <div class="resume-content mr-auto">
-              <h3 class="mb-0">Full Stack Developer</h3>
-              <div class="subheading mb-3"><span class="text-primary bolder">Apple (finance)</span> · September 2015 - October 2016</div>
-              <p>The Global Finance department at Apple created and maintained internal websites, to help facilitate secure communication and document sharing. The small team of developers primarily used LAMP Stack CodeIgniter, with some NodeJS/Grunt/Gulp/Sass optimization, for most projects, and Drupal CMS for others. Apart from other responsibilities, I wrote parallelized scripts to recover lost data for another team.</p>
-            </div>
-          </div>
-
-
-          <div class="resume-item d-flex flex-column flex-md-row mb-5">
-            <div class="resume-content mr-auto">
-              <h3 class="mb-0">Back-End Developer</h3>
-              <div class="subheading mb-3"><span class="text-primary bolder">United Business Media (UBM)</span> · November 2011 - 2015</div>
-              <p>UBM is a parent company of many conferences like Black Hat and The Game Developer's Conference. While at UBM, I developed an application to allow conference attendees to view the speaker schedule and save a personal itinerary. The Schedule Builder application is still being used by many conferences at UBM.</p>
-            </div>
-          </div>
-
-
-          <div class="resume-item d-flex flex-column flex-md-row mb-5">
-            <div class="resume-content mr-auto">
-              <h3 class="mb-0">Staff Programmer</h3>
-              <div class="subheading mb-3"><span class="text-primary bolder">The Buck Institute for Research on Aging</span> · June 2009 - 2012</div>
-              <p>Working with bioinformaticians gave me exposure to big data, automation pipelines and creating user interfaces that are easy to understand. I created web interfaces to enter large lists of genes, and various reports are displayed, based on research done at the Buck Institute.
-              <ul>
-                <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/23409969" target="_blank">http://www.ncbi.nlm.nih.gov/pubmed/23409969</a></li>
-                <li><a href="http://www.ncbi.nlm.nih.gov/pubmed/22706384" target="_blank">http://www.ncbi.nlm.nih.gov/pubmed/22706384</a></li>
-              </ul>
-            </p>
-            </div>
-          </div>
-
         </div>
 
-      </section>
-
-      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="skills">
-        <div class="my-auto">
-          <h2 class="mb-5">Skills</h2>
-          I have personal experience with the following tools, technologies, languages and databases.<br /><br />
-                
-          <div class="skill-container">
-            <div class="subheading mb-3">Tools / Technologies</div>
-            <ul class="left-border">
-              <li>AWS, GCP, Azure, IBMCloud, On-Prem</li>
-              <li>Terraform, CloudFormation</li>
-              <li>kubernetes/docker: helm, spinnaker,<br />
-                harness, argocd, fluxcd, prometheus,<br />
-                grafana, sysdig/falco</li>
-              <li>jenkins, github-actions, circleci,<br />
-                buildkite, codedeploy, chef, tekton,<br />
-                prow</li>
-            </ul>
-          </div>
-          <div class="skill-container">
-            <div class="subheading mb-3">Programming Languages</div>
-            <ul class="left-border">
-              <li>bash</li>
-              <li>python</li>
-              <li>golang</li>
-              <li>javascript/node</li>
-              <li>php</li>
-              <li>perl</li>
-              <li>html</li>
-              <li>css</li>
-            </ul>
-          </div>
-          <div class="skill-container">
-            <div class="subheading mb-3">Databases / Caches</div>
-            <ul class="left-border">
-              <li>postgres</li>
-              <li>mysql</li>
-              <li>mssql</li>
-              <li>nosql</li>
-              <li>sqlite</li>
-              <li>cassandra</li>
-              <li>elasticsearch</li>
-              <li>redis</li>
-              <li>memcache</li>
-            </ul>
-          </div>
-      </section>
-
-
-
-      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="examples">
-        <div class="my-auto">
-          <h2 class="mb-5">Open-Source Examples</h2>
-
-          <strong>Projects</strong>
-          <ul>
-            <li class="list-item" id="bashbot" name="bashbot">BashBot (GoLang) · <a href="https://github.com/mathew-fleisch/bashbot" target="_blank">source</a> · <a href="https://hub.docker.com/r/mathewfleisch/bashbot" target="_blank">docker-hub</a><br />
-            BashBot uses a json configuration file to define custom commands. Written in golang, BashBot uses slack's real-time-messaging api (RTM) to parse each message via regular expressions. If a command is detected and matched to an entry in the configuration file, bash commands are executed pertaining to that entry. Sensitive commands can be restricted to private channels, within the configuration file, and members of that private channel can execute that restricted command. This allows infrastructure teams to quickly port the internal tools they create, into version controlled slack commands, and broaden adoption to other coworkers in the organization. A slack admin can build from <a href="https://github.com/mathew-fleisch/bashbot" target="_blank">source</a>, download a <a href="https://github.com/mathew-fleisch/bashbot/releases" target="_blank">go-binary</a>, or use a pre-built <a href="https://hub.docker.com/r/mathewfleisch/bashbot" target="_blank">container via docker-hub</a> to run BashBot in a varity of different environments. Automation builds and pushes multi-arch containers to docker hub via github actions.<br /><br /></li>
-
-            <li class="list-item" id="bashbot" name="bashbot">AGIMUS (python) · <a href="https://github.com/jp00p/AGIMUS" target="_blank">source</a><br />
-            A community of fans of a Star Trek podcast called the Greatest Generation has a Discord server and developed a Discord bot to play games, and provide other genre specific information called <a href="https://memory-alpha.fandom.com/wiki/AGIMUS" target="_blank">AGIMUS</a>. I helped to standardize the monolith python script, into an extensible library, that is now self-hosted in Docker or Kubernetes and now has many contributors. This application includes a mysql database (also running in a container), and has a dedicated staging discord/environment for testing new features. The repository includes github actions to build, test in pull-requests and host the container versions in github's container registry on merges to the main branch. The pull-request test validates the proposed change will not break the start-up sequence by running the bot in a KinD (Kubernetes-In-Docker) cluster on each commit to the PR. We have also developed a method to backup/restore our mysql database using a private github repository. A cron-job within the bot will run a mysql-dump four times per day, compress and push that tarball to the private repository. Other manual commands will allow us to restore from one of those commit hashes, in the case of disaster recovery. Typical functions of the bot will reach out to open-source APIs (nasa, openapi, wolfram etc) or custom made star trek themed games for discord users to interact with via slash-commands.<br /><br /></li>
-
-
-            <li class="list-item" id="bashbot" name="bashbot">asdf version manager (bash) · <a href="https://github.com/mathew-fleisch?tab=repositories&q=asdf&type=&language=&sort=" target="_blank">source</a><br />
-              I have contributed to, and created a number of plugins for the <a href="https://asdf-vm.com/" target="_blank">asdf version manager</a> with the goal of ensuring tools I use in self-hosted github action automations run on the raspberry pi (arm64): <a href="https://github.com/mathew-fleisch/asdf-argocd" target="_blank">asdf-argocd</a>, <a href="https://github.com/mathew-fleisch/asdf-awscli" target="_blank">asdf-awscli</a>, <a href="https://github.com/mathew-fleisch/asdf-bashbot" target="_blank">asdf-bashbot</a>, <a href="https://github.com/mathew-fleisch/asdf-cfssl" target="_blank">asdf-cfssl</a>, <a href="https://github.com/mathew-fleisch/asdf-dockle" target="_blank">asdf-dockle</a>, <a href="https://github.com/mathew-fleisch/asdf-flux2" target="_blank">asdf-flux2</a>, <a href="https://github.com/mathew-fleisch/asdf-helm" target="_blank">asdf-helm</a>, <a href="https://github.com/mathew-fleisch/asdf-helm-cr" target="_blank">asdf-helm-cr</a>, <a href="https://github.com/mathew-fleisch/asdf-kustomize" target="_blank">asdf-kustomize</a>, <a href="https://github.com/mathew-fleisch/asdf-loki-logcli" target="_blank">asdf-loki-logcli</a>, <a href="https://github.com/mathew-fleisch/asdf-mage" target="_blank">asdf-mage</a>, <a href="https://github.com/mathew-fleisch/asdf-rbac-lookup" target="_blank">asdf-rbac-lookup</a>, <a href="https://github.com/mathew-fleisch/asdf-shellcheck" target="_blank">asdf-shellcheck</a>, <a href="https://github.com/mathew-fleisch/asdf-shfmt" target="_blank">asdf-shfmt</a>, <a href="https://github.com/mathew-fleisch/asdf-tekton-cli" target="_blank">asdf-tekton-cli</a>, <a href="https://github.com/mathew-fleisch/asdf-velero" target="_blank">asdf-velero</a>, <a href="https://github.com/mathew-fleisch/asdf-yq" target="_blank">asdf-yq</a></li>
-            <br /><br /></li>
-
-            <li class="list-item" id="build-local-environments" name="build-local-environments">Build/Local Environments · <a href="https://github.com/mathew-fleisch/github-actions-runner" target="_blank">github-actions-runner source</a> · <a href="https://github.com/mathew-fleisch/docker-dev-env" target="_blank">docker-dev-env source</a><br />
-              The <a href="https://github.com/mathew-fleisch/docker-dev-env/" target="_blank">docker-dev-env</a> and <a href="https://github.com/mathew-fleisch/github-actions-runner/" target="_blank">github-actions-runner</a> are similar in that they both pre-install tools that are useful for infrastructer/devops tasks, but the github-actions-runner also includes the runner agent to register a self-hosted github-action runner. I did a post about the <a href="https://github.com/mathew-fleisch/blog/blob/main/blog/2021-04-07/dev-in-a-can.md" target="_blank">docker-dev-env</a> and <a href="https://github.com/mathew-fleisch/blog/blob/main/blog/2021-05-17/self-hosted-github-action-runners-on-self-hosted-kubernetes-cluster.md" target="_blank">github-actions-runner</a> projects on my <a href="https://github.com/mathew-fleisch/blog/" target="_blank">blog</a>.<br /><br /></li>
-
-            <li class="list-item">Timelapse Pipeline (Bash) · <a href="https://github.com/mathew-fleisch/timelapse-pipeline" target="_blank">source</a><br />
-            This idea came from a hackathon project I started at Eaze with a Raspberry Pi+camera. The office looked over the ferry terminal in San Francisco, and I thought the fog and boats would be cool to see as a time lapse. Images are captured at 1fps and stored in an s3 bucket, using the date/timestamp as the filename. A processing pipeline pulls the images down in a circleci container, runs ffmpeg to make a video, and then speeds it up to match a random mp3.<a href="https://www.youtube.com/channel/UCg_RROW8rUh89sWqGaJ8Llg" target="_blank">YouTube Channel</a><br /><strong>Example:</strong><br /><iframe width="560" height="315" src="https://www.youtube.com/embed/un9X0gUwX0I" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><br /><br /></li>
-            <li class="list-item">Tetris (python) · <a href="https://github.com/mathew-fleisch/dc26-fur-scripts/blob/master/animations/tetris.py" target="_blank">source</a> · <a href="https://i.imgur.com/u1zjQc9.mp4" target="_blank">mp4</a><br />
-            One of the unique aspects of the DEF CON conference is third-party badges that are essentially circuit boards with LEDs and screens on them. One badge has an LED matrix and an accelerometer sensor. I used the on-board interface via a serial connection to port the game Tetris to that platform in Python. <a href="https://i.imgur.com/u1zjQc9.mp4" target="_blank">This video</a> shows Tetris in action.<br /><br /></li>
-            <li class="list-item"><a href="https://www.youtube.com/channel/UC3s0BtrBJpwNDaflRSoiieQ" target="_blank">Hak5's</a> BashBunny Payloads (bash) · <a href="https://github.com/hak5/bashbunny-payloads/tree/master/payloads/library/general/GitBunnyGit" target="_blank">GitBunnyGit source</a> · <a href="https://github.com/hak5/bashbunny-payloads/tree/master/payloads/library/exfiltration/TwoStageMac" target="_blank">TwoStageMac source</a><br />
-            A video podcast I've subscribed to for over ten years also sells penetration testing equipment through their website. One of their products, BashBunny, combines a keyboard simulator with an arm chip running linux via USB. This allows penetration testers to script the kind of intrusion and/or exfiltration attacks, with physical access to a target computer. I have written two payloads for this device: <a href="https://github.com/hak5/bashbunny-payloads/tree/master/payloads/library/general/GitBunnyGit" target="_blank">GitBunnyGit</a>  and <a href="https://github.com/hak5/bashbunny-payloads/tree/master/payloads/library/exfiltration/TwoStageMac" target="_blank">TwoStageMac</a>. GitBunnyGit streamlines the process of installing and updating all other open-source payloads, by running git commands directly on the device. The TwoStageMac payload utilizes the BashBunny's ability to copy files to the target computer to run a malicious script. The sample second stage payload does some basic profiling and is intended to be swapped out for the penetration tester's own second stage.<br /><br /></li>
-          </ul>
-          <p class="codepen" data-height="600" data-slug-hash="powMYVB" data-user="mathew-fleisch" style="height: 600px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-            <span>See the Pen <a href="https://codepen.io/mathew-fleisch/pen/powMYVB">
-            Column Sorting Game</a> by Mathew Fleisch (<a href="https://codepen.io/mathew-fleisch">@mathew-fleisch</a>)
-            on <a href="https://codepen.io">CodePen</a>.</span>
-          </p>
-          <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
-          <strong>Programming Challenges</strong>
-          <ul>
-            <li class="list-item">html crawler -> api -> ui (javascript) · <a href="https://github.com/mathew-fleisch/def-con-schedule" target="_blank">source</a> · <a href="https://mathew-fleisch.github.io/def-con-schedule/" target="_blank">demo</a><br />
-            This project was sparked by attending DEF CON and not liking the given interface for the conference schedule. I wrote this tool to scrape the conference website for data, and then display that data in a more effecient way.<br /><br /></li>
-           
-            <li class="list-item">Morse Code Game (arduino/c) · <a href="https://github.com/mathew-fleisch/TheHelloWorldMorseCodeGame" target="_blank">source</a><br />
-            This program uses Sparkfun's ProtoSnap board or other Arduino board with a button, buzzer, and rgb led attached to the specified pins. The concept of the program is to input morse code via a button, have a function encode, then decode a sequence of 1-5 button presses into an english character. The letter is then printed to the serial monitor and a green light blips, if a character is correctly identified; a red light blips and an error is printed to the serial monitor, if no match was found. To make game around only using the board, a user can spell "hello world" and a different tone will play, as well as a chromatic- like tone-blips as each letter is spelled correctly. If the user spells the target word (target because you the programmer, can change "hello world" to any other string of chars) incorrectly, they have to start at the beginning of the game, with the first letter.<br /><br />
-            </li>
-          </ul>
-
-      </section>
-
-      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="interests">
-        <div class="my-auto">
-          <h2 class="mb-5">Interests</h2>
-          <p>When I am not messing with computers in some way, I like to play music, read sci-fi/fantasy, travel and eat great food.</p>
-          <p><strong>Music</strong>: I grew up playing music and have played in performing bands most of my life. Most recently I played keyboards and saxophone in the pop punk band <a href="https://mathew-fleisch.github.io/portfolio/ovv/" target="_blank">Our Vinyl Vows</a></p>
-          <p><strong>Science Fiction/Fantasy</strong>: My favorite Authors are Robert Jordan, Brandon Sanderson, John Scalzi, Orson Scott Card, Daniel Suarez, James S.A. Corey, and Neal Stephenson. <a href="https://www.goodreads.com/user/show/51571316-mathew" target="_blank">GoodReads Profile</a></p>
-          <p><strong>Travel</strong>: I have visited half of the united states and went on <a href="https://imgur.com/gallery/Xb8ubke" target="_blank">safari in Tanzania</a> with my wife.</p>
-          <p><strong>Food</strong>: Whether we are in town or abroad, my family and I love to eat delicious food. We will go to restaurants or cook various dishes inspired from our families and our travels.</p>
+        <!-- Workday - Scylla Team -->
+        <div class="experience-item">
+            <div class="experience-header">
+                <h3>Senior Infrastructure Engineer <span class="company">@ Workday (Scylla Team)</span></h3>
+                <span class="date">March 2021 - 2024</span>
+            </div>
+            <div class="experience-content">
+                <p>Maintained an automated platform for deploying the Workday stack on multi-cloud Kubernetes clusters.</p>
+                <ul>
+                    <li>Managed custom Kubernetes operators for provisioning cloud resources like storage and databases.</li>
+                    <li>Built cloud-agnostic end-to-end test suites to validate microservice functionality at scale.</li>
+                </ul>
+            </div>
         </div>
-      </section>
 
-    </div>
+        <!-- Sysdig -->
+        <div class="experience-item">
+            <div class="experience-header">
+                <h3>Senior Infrastructure Engineer <span class="company">@ Sysdig</span></h3>
+                <span class="date">2020 - 2021</span>
+            </div>
+            <div class="experience-content">
+                <p>Developed developer tools and maintained multi-cloud infrastructure for enterprise monitoring applications.</p>
+                <ul>
+                    <li>Migrated JFrog Artifactory from EC2/EBS to a Kubernetes/S3-backed setup, managing 1TB of artifacts with zero downtime.</li>
+                    <li>Automated Kubernetes cluster deployments (Kops) and Sysdig stack provisioning using GitHub Actions and GitOps principles.</li>
+                </ul>
+            </div>
+        </div>
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+        <!-- Eaze -->
+        <div class="experience-item">
+            <div class="experience-header">
+                <h3>Senior Infrastructure Engineer <span class="company">@ Eaze</span></h3>
+                <span class="date">2018 - 2020</span>
+            </div>
+            <div class="experience-content">
+                <p>Transformed legacy infrastructure into modern, repeatable environments using Terraform and CI/CD.</p>
+                <ul>
+                    <li>Built reusable Terraform modules to replace snowflake environments, enabling automated developer sandboxes.</li>
+                    <li>Developed "BashBot" to trigger infrastructure provisioning and deployments directly from Slack.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
 
-    <!-- Plugin JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <section id="skills" style="background: var(--bg-secondary); max-width: 100%; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+        <div style="max-width: var(--container-width); margin: 0 auto; padding: 0 1rem;">
+            <h2 class="section-title">Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h4>Cloud & Orchestration</h4>
+                    <div class="skill-list">
+                        <span class="skill-tag">Kubernetes</span>
+                        <span class="skill-tag">AWS / GCP / Azure</span>
+                        <span class="skill-tag">Terraform</span>
+                        <span class="skill-tag">Helm</span>
+                        <span class="skill-tag">ArgoCD</span>
+                        <span class="skill-tag">EKS</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h4>CI / CD & Tooling</h4>
+                    <div class="skill-list">
+                        <span class="skill-tag">GitHub Actions</span>
+                        <span class="skill-tag">Tekton</span>
+                        <span class="skill-tag">Argo Workflows</span>
+                        <span class="skill-tag">Jenkins</span>
+                        <span class="skill-tag">Sysdig / Falco</span>
+                        <span class="skill-tag">Prometheus</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h4>Languages</h4>
+                    <div class="skill-list">
+                        <span class="skill-tag">Go</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Bash</span>
+                        <span class="skill-tag">JavaScript / Node</span>
+                        <span class="skill-tag">PHP</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <!-- Custom scripts for this template -->
-    <script src="js/resume.js"></script>
+    <section id="projects">
+        <h2 class="section-title">Open Source</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <h4>BashBot <a href="https://github.com/mathew-fleisch/bashbot" target="_blank"><i class="fab fa-github"></i></a></h4>
+                <p>An extensible Slack bot written in Go for executing bash commands via RTM. Used for ChatOps and triggering infrastructure workflows.</p>
+                <div class="project-links">
+                    <span class="skill-tag">Go</span>
+                    <span class="skill-tag">Slack API</span>
+                </div>
+            </div>
+            <div class="project-card">
+                <h4>AGIMUS <a href="https://github.com/jp00p/AGIMUS" target="_blank"><i class="fab fa-github"></i></a></h4>
+                <p>Standardized a monolithic Python Discord bot into an extensible library. Features a MySQL backend, CI/CD via GitHub Actions and KinD tests.</p>
+                <div class="project-links">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">Kubernetes</span>
+                </div>
+            </div>
+            <div class="project-card">
+                <h4>asdf Plugins <a href="https://github.com/mathew-fleisch?tab=repositories&q=asdf" target="_blank"><i class="fab fa-github"></i></a></h4>
+                <p>Maintainer of numerous asdf-vm plugins (ArgoCD, AWS CLI, Tekton, etc.) ensuring ARM64 compatibility for local development on Raspberry Pi.</p>
+                <div class="project-links">
+                    <span class="skill-tag">Bash</span>
+                    <span class="skill-tag">DevOps Tooling</span>
+                </div>
+            </div>
+            <div class="project-card">
+                <h4>timelapse-pipeline <a href="https://github.com/mathew-fleisch/timelapse-pipeline" target="_blank"><i class="fab fa-github"></i></a></h4>
+                <p>A cloud-native image processing pipeline for capturing and generating high-quality timelapse videos from remote cameras.</p>
+                <div class="project-links">
+                    <span class="skill-tag">Bash</span>
+                    <span class="skill-tag">FFmpeg</span>
+                    <span class="skill-tag">S3</span>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
 
-  </body>
+<footer style="padding: 4rem 1rem; text-align: center; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.875rem;">
+    <p>&copy; 2026 Mathew Fleisch. Built with <i class="fas fa-heart" style="color: #ef4444;"></i> for the home lab.</p>
+</footer>
 
+</body>
 </html>
