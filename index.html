@@ -229,6 +229,81 @@
             gap: 2rem;
         }
 
+        .creative-section {
+            background: #111;
+            color: #fff;
+            max-width: 100%;
+            border-top: 1px solid #333;
+            border-bottom: 1px solid #333;
+        }
+
+        .creative-container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 4rem 1rem;
+        }
+
+        .creative-layout {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .creative-title {
+            color: #fff;
+            border-bottom-color: var(--primary);
+        }
+
+        .video-showcase {
+            background: #000;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+        }
+
+        .music-showcase {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .platform-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+        }
+
+        .platform-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            background: #222;
+            border: 1px solid #333;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            color: #ccc;
+            font-size: 0.875rem;
+            transition: all 0.2s;
+        }
+
+        .platform-btn:hover {
+            background: #333;
+            color: #fff;
+            border-color: var(--primary);
+        }
+
+        .platform-btn i {
+            font-size: 1.125rem;
+        }
+
+        @media (max-width: 850px) {
+            .creative-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
         .project-card {
             border: 1px solid var(--border);
             padding: 1.5rem;
@@ -279,8 +354,7 @@
             <li><a href="#experience">Experience</a></li>
             <li><a href="#skills">Skills</a></li>
             <li><a href="#projects">Open Source</a></li>
-            <li><a href="#music">Music</a></li>
-            <li><a href="#videos">Videos</a></li>
+            <li><a href="#creative">Creative</a></li>
         </ul>
     </nav>
 </header>
@@ -434,16 +508,41 @@
                 </div>
             </div>
             <div class="project-card">
-                <h4>timelapse-pipeline <a href="https://github.com/mathew-fleisch/timelapse-pipeline" target="_blank"><i class="fab fa-github"></i></a></h4>
-                <p>A cloud-native image processing pipeline for capturing and generating high-quality timelapse videos. Original music composed for each recent release.</p>
-                <div style="margin-bottom: 1rem; border-radius: 0.25rem; overflow: hidden; background: #000; aspect-ratio: 16/9;">
-                    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/Cxd-yt0ZpGw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                </div>
+                <h4>Advent of Code <a href="https://github.com/mathew-fleisch?tab=repositories&q=advent" target="_blank"><i class="fab fa-github"></i></a></h4>
+                <p>Solutions for the annual Advent of Code programming challenges, primarily implemented in Bash to push the limits of shell scripting.</p>
                 <div class="project-links">
                     <span class="skill-tag">Bash</span>
-                    <span class="skill-tag">FFmpeg</span>
-                    <span class="skill-tag">S3</span>
-                    <a href="https://www.youtube.com/@thedraxiom/videos" target="_blank" style="font-size: 0.75rem; vertical-align: middle; margin-left: 0.5rem;"><i class="fab fa-youtube"></i> YouTube Channel</a>
+                    <span class="skill-tag">Algorithms</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="creative" class="creative-section">
+        <div class="creative-container">
+            <h2 class="section-title creative-title">Creative Works</h2>
+            <p style="margin-bottom: 3rem; color: #999;">Where engineering meets art. Original music paired with cinematic timelapses.</p>
+
+            <div class="creative-layout">
+                <div class="video-showcase">
+                    <div style="aspect-ratio: 16/9; width: 100%;">
+                        <iframe id="latest-video-iframe" width="100%" height="100%" src="https://www.youtube.com/embed/Cxd-yt0ZpGw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                    <div style="padding: 1.5rem;">
+                        <h4 id="latest-video-title" style="margin-bottom: 0.5rem; font-size: 1.125rem;">Featured Timelapse: Salesforce Tower, SF</h4>
+                        <p style="font-size: 0.875rem; color: #aaa;">This timelapse is dynamically loaded from my latest upload. View more on my <a href="https://youtube.com/@thedraxiom/videos" target="_blank" style="color: var(--primary);">YouTube Channel</a>.</p>
+                    </div>
+                </div>
+
+                <div class="music-showcase">
+                    <h4 style="font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em; color: #aaa;">Music on Spotify</h4>
+                    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/artist/6yTIT3dvTIdg93squxhNdW?utm_source=generator&theme=0" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                    
+                    <h4 style="font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em; color: #aaa; margin-top: 1rem;">Other Platforms</h4>
+                    <div class="platform-links">
+                        <a href="https://music.apple.com/us/artist/draxiom/1870941167" target="_blank" class="platform-btn"><i class="fab fa-apple"></i> Apple</a>
+                        <a href="https://draxiom.bandcamp.com/" target="_blank" class="platform-btn"><i class="fab fa-bandcamp"></i> Bandcamp</a>
+                        <a href="https://www.instagram.com/thedraxiom/" target="_blank" class="platform-btn"><i class="fab fa-instagram"></i> Instagram</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -454,55 +553,30 @@
     <p>&copy; 2026 Mathew Fleisch. Built with <i class="fas fa-heart" style="color: #ef4444;"></i> for the home lab.</p>
 </footer>
 
-</body>
-</html>
-></h4>
-                <p>Listen to my latest releases and curated playlists on Spotify.</p>
-                <div class="project-links">
-                    <a href="https://open.spotify.com/artist/6yTIT3dvTIdg93squxhNdW?si=PlxGX-AKTwChCiTHmPpv7w" target="_blank">View Artist Profile</a>
-                </div>
-            </div>
-            <div class="project-card">
-                <h4>Apple Music <a href="https://music.apple.com/us/artist/draxiom/1870941167" target="_blank"><i class="fab fa-apple"></i></a></h4>
-                <p>Stream high-quality audio of my tracks on Apple Music.</p>
-                <div class="project-links">
-                    <a href="https://music.apple.com/us/artist/draxiom/1870941167" target="_blank">Listen on Apple Music</a>
-                </div>
-            </div>
-            <div class="project-card">
-                <h4>Bandcamp <a href="https://draxiom.bandcamp.com/" target="_blank"><i class="fab fa-bandcamp"></i></a></h4>
-                <p>Support my music directly and download tracks via Bandcamp.</p>
-                <div class="project-links">
-                    <a href="https://draxiom.bandcamp.com/" target="_blank">Visit Bandcamp</a>
-                </div>
-            </div>
-        </div>
-    </section>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const channelID = "UC-lHJZR3Gqxm24_Vd_AJ5Yw";
+        const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelID}`;
+        const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
 
-    <section id="videos">
-        <h2 class="section-title">Videos</h2>
-        <p style="margin-bottom: 2rem; color: var(--text-muted);">
-            I create timelapse videos, often featuring the San Francisco skyline and Salesforce Tower, 
-            paired with my original compositions.
-        </p>
-        <div class="projects-grid">
-            <div class="project-card" style="grid-column: 1 / -1;">
-                <h4>YouTube Channel <a href="https://youtube.com/@thedraxiom/videos" target="_blank"><i class="fab fa-youtube"></i></a></h4>
-                <p>Explore my collection of timelapses and visual experiments.</p>
-                <div style="margin-top: 1.5rem; border-radius: 0.5rem; overflow: hidden; background: #000; aspect-ratio: 16/9; max-width: 800px; margin-left: auto; margin-right: auto;">
-                    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/Cxd-yt0ZpGw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                </div>
-                <div class="project-links" style="margin-top: 1rem; text-align: center;">
-                    <a href="https://youtube.com/@thedraxiom/videos" target="_blank">Visit @thedraxiom on YouTube</a>
-                </div>
-            </div>
-        </div>
-    </section>
-</main>
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'ok' && data.items.length > 0) {
+                    const latestVideo = data.items[0];
+                    const videoUrl = latestVideo.link;
+                    const videoId = videoUrl.split('v=')[1];
+                    const videoTitle = latestVideo.title;
 
-<footer style="padding: 4rem 1rem; text-align: center; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.875rem;">
-    <p>&copy; 2026 Mathew Fleisch. Built with <i class="fas fa-heart" style="color: #ef4444;"></i> for the home lab.</p>
-</footer>
+                    document.getElementById('latest-video-iframe').src = `https://www.youtube.com/embed/${videoId}`;
+                    document.getElementById('latest-video-title').innerText = `Latest: ${videoTitle}`;
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching latest video:', error);
+            });
+    });
+</script>
 
 </body>
 </html>
