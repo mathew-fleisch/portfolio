@@ -591,10 +591,16 @@
 </main>
 
 <footer style="padding: 4rem 1rem; text-align: center; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.875rem;">
-    <p>&copy; 2026 Mathew Fleisch. Built with <i class="fas fa-heart" style="color: #ef4444;"></i> for the home lab.</p>
+    <div style="margin-bottom: 1.5rem;">
+        <a href="https://github.com/mathew-fleisch" target="_blank" style="margin: 0 1rem; color: var(--text-muted); font-size: 1.25rem;"><i class="fab fa-github"></i></a>
+        <a href="https://linkedin.com/pub/mathew-fleisch/13/610/57a" target="_blank" style="margin: 0 1rem; color: var(--text-muted); font-size: 1.25rem;"><i class="fab fa-linkedin"></i></a>
+        <a href="mailto:mathew.fleisch@gmail.com" style="margin: 0 1rem; color: var(--text-muted); font-size: 1.25rem;"><i class="fas fa-envelope"></i></a>
+    </div>
+    <p>&copy; <span id="year"></span> Mathew Fleisch. Built with <i class="fas fa-heart" style="color: #ef4444;"></i> using Vanilla CSS & HTML.</p>
 </footer>
 
 <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
     const themeToggle = document.getElementById('theme-toggle');
     const htmlElement = document.documentElement;
     const icon = themeToggle.querySelector('i');
