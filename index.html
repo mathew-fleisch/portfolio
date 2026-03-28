@@ -12,12 +12,26 @@
         :root {
             --primary: #3b82f6;
             --primary-dark: #2563eb;
-            --text-main: #1f2937;
-            --text-muted: #6b7280;
+            --container-width: 900px;
+            
+            /* Dark Mode (Default) */
+            --bg-main: #0f172a;
+            --bg-secondary: #1e293b;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --border: #334155;
+            --header-bg: rgba(15, 23, 42, 0.9);
+            --card-bg: #1e293b;
+        }
+
+        [data-theme="light"] {
             --bg-main: #ffffff;
             --bg-secondary: #f9fafb;
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
             --border: #e5e7eb;
-            --container-width: 900px;
+            --header-bg: rgba(255, 255, 255, 0.9);
+            --card-bg: #f9fafb;
         }
 
         * {
@@ -32,6 +46,7 @@
             background-color: var(--bg-main);
             line-height: 1.6;
             padding-top: 60px;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         a {
@@ -49,10 +64,11 @@
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(255, 255, 255, 0.9);
+            background: var(--header-bg);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border);
             z-index: 1000;
+            transition: background 0.3s, border-bottom 0.3s;
         }
 
         nav {
@@ -71,6 +87,12 @@
             color: var(--text-main);
         }
 
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
         nav ul {
             display: flex;
             list-style: none;
@@ -85,6 +107,24 @@
 
         nav ul a:hover {
             color: var(--text-main);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 0.4rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .theme-toggle:hover {
+            background: var(--bg-secondary);
+            border-color: var(--primary);
         }
 
         section {
@@ -135,7 +175,7 @@
         .resume-btn {
             display: inline-block;
             background: var(--primary);
-            color: white;
+            color: white !important;
             padding: 0.5rem 1.5rem;
             border-radius: 0.5rem;
             font-weight: 600;
@@ -144,7 +184,6 @@
 
         .resume-btn:hover {
             background: var(--primary-dark);
-            color: white;
         }
 
         .section-title {
@@ -230,11 +269,11 @@
         }
 
         .creative-section {
-            background: #111;
+            background: #000;
             color: #fff;
             max-width: 100%;
-            border-top: 1px solid #333;
-            border-bottom: 1px solid #333;
+            border-top: 1px solid #111;
+            border-bottom: 1px solid #111;
         }
 
         .creative-container {
@@ -244,10 +283,9 @@
         }
 
         .creative-layout {
-            display: grid;
-            grid-template-columns: 1.5fr 1fr;
-            gap: 3rem;
-            align-items: start;
+            display: flex;
+            flex-direction: column;
+            gap: 4rem;
         }
 
         .creative-title {
@@ -260,17 +298,19 @@
             border-radius: 0.75rem;
             overflow: hidden;
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+            width: 100%;
         }
 
         .music-showcase {
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
+            width: 100%;
         }
 
         .platform-links {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1rem;
         }
 
@@ -279,8 +319,8 @@
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
-            background: #222;
-            border: 1px solid #333;
+            background: #111;
+            border: 1px solid #222;
             padding: 0.75rem;
             border-radius: 0.5rem;
             color: #ccc;
@@ -289,7 +329,7 @@
         }
 
         .platform-btn:hover {
-            background: #333;
+            background: #222;
             color: #fff;
             border-color: var(--primary);
         }
@@ -300,7 +340,7 @@
 
         @media (max-width: 850px) {
             .creative-layout {
-                grid-template-columns: 1fr;
+                gap: 3rem;
             }
         }
 
@@ -308,7 +348,7 @@
             border: 1px solid var(--border);
             padding: 1.5rem;
             border-radius: 0.5rem;
-            background: var(--bg-secondary);
+            background: var(--card-bg);
             transition: transform 0.2s, box-shadow 0.2s;
         }
 
@@ -349,13 +389,18 @@
 <header>
     <nav>
         <div class="logo">Mathew Fleisch</div>
-        <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#projects">Open Source</a></li>
-            <li><a href="#creative">Creative</a></li>
-        </ul>
+        <div class="nav-right">
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Open Source</a></li>
+                <li><a href="#creative">Creative</a></li>
+            </ul>
+            <button class="theme-toggle" id="theme-toggle" title="Toggle color theme">
+                <i class="fas fa-sun"></i>
+            </button>
+        </div>
     </nav>
 </header>
 
@@ -440,7 +485,7 @@
         </div>
     </section>
 
-    <section id="skills" style="background: var(--bg-secondary); max-width: 100%; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <section id="skills" style="background: var(--bg-secondary); max-width: 100%; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); transition: background 0.3s, border 0.3s;">
         <div style="max-width: var(--container-width); margin: 0 auto; padding: 0 1rem;">
             <h2 class="section-title">Skills</h2>
             <div class="skills-grid">
@@ -528,8 +573,8 @@
                         <iframe id="latest-video-iframe" width="100%" height="100%" src="https://www.youtube.com/embed/Cxd-yt0ZpGw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                     </div>
                     <div style="padding: 1.5rem;">
-                        <h4 id="latest-video-title" style="margin-bottom: 0.5rem; font-size: 1.125rem;">Featured Timelapse: Salesforce Tower, SF</h4>
-                        <p style="font-size: 0.875rem; color: #aaa;">This timelapse is dynamically loaded from my latest upload. View more on my <a href="https://youtube.com/@thedraxiom/videos" target="_blank" style="color: var(--primary);">YouTube Channel</a>.</p>
+                        <h4 id="latest-video-title" style="margin-bottom: 0.5rem; font-size: 1.125rem;">Latest: 2026.01.01 Bay Bridge Rainbow</h4>
+                        <p style="font-size: 0.875rem; color: #aaa;">View more on my <a href="https://youtube.com/@thedraxiom/videos" target="_blank" style="color: var(--primary);">YouTube Channel</a>.</p>
                     </div>
                 </div>
 
@@ -554,28 +599,32 @@
 </footer>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const channelID = "UC-lHJZR3Gqxm24_Vd_AJ5Yw";
-        const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelID}`;
-        const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
+    const themeToggle = document.getElementById('theme-toggle');
+    const htmlElement = document.documentElement;
+    const icon = themeToggle.querySelector('i');
 
-        fetch(apiUrl)
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'ok' && data.items.length > 0) {
-                    const latestVideo = data.items[0];
-                    const videoUrl = latestVideo.link;
-                    const videoId = videoUrl.split('v=')[1];
-                    const videoTitle = latestVideo.title;
+    // Check for saved theme preference or default to dark
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    setTheme(savedTheme);
 
-                    document.getElementById('latest-video-iframe').src = `https://www.youtube.com/embed/${videoId}`;
-                    document.getElementById('latest-video-title').innerText = `Latest: ${videoTitle}`;
-                }
-            })
-            .catch(error => {
-                console.error('Error fetching latest video:', error);
-            });
+    themeToggle.addEventListener('click', () => {
+        const currentTheme = htmlElement.getAttribute('data-theme') || 'dark';
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        setTheme(newTheme);
     });
+
+    function setTheme(theme) {
+        htmlElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+        
+        if (theme === 'light') {
+            icon.classList.remove('fa-sun');
+            icon.classList.add('fa-moon');
+        } else {
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+        }
+    }
 </script>
 
 </body>
