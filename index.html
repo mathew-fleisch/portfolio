@@ -443,10 +443,12 @@
             <div class="experience-content">
                 <p>Building scalable abstractions and standardized infrastructure for the Platform Infrastructure Engineering team, marking five years of total tenure at Workday across multiple specialized platform teams.</p>
                 <ul>
-                    <li>Created a custom MCP server for the team's infrastructure state, improving visibility and enabling AI-driven insights into complex deployments.</li>
-                    <li>Developed an abstraction layer for Amazon EKS using Terraform and Cookiecutter to standardize configuration and environment setup.</li>
-                    <li>Engineered cloud-native CI/CD pipelines using Tekton and Argo Workflows for infrastructure and custom API deployments across multiple Kubernetes clusters.</li>
-                    <li>Created SOC-compliant release and change management automation processes.</li>
+                    <li>Standardized Amazon EKS configurations using a custom Terraform and Cookiecutter abstraction layer.</li>
+                    <li>Engineered cloud-native CI/CD pipelines with Tekton and Argo Workflows for global infrastructure and application deployments.</li>
+                    <li>Built a GitHub webhook routing application with custom approval logic to automate production promotion pipelines.</li>
+                    <li>Standardized build automation for application stacks including Go, Python, Java, and Node.js.</li>
+                    <li>Developed SOC-compliant release processes and a custom MCP server for AI-driven infrastructure visibility.</li>
+                    <li>Participated in on-call rotation for mission-critical global platforms.</li>
                 </ul>
             </div>
         </div>
@@ -459,10 +461,28 @@
             <div class="experience-content">
                 <p>Maintained an automated platform for deploying the Workday stack on multi-cloud Kubernetes clusters.</p>
                 <ul>
-                    <li>Migrated legacy infrastructure from AWS to GCP to enable multi-cloud deployments.</li>
-                    <li>Automated FedRAMP-compliant image update processes to ensure base images receive continuous security patches.</li>
-                    <li>Managed custom Kubernetes operators for provisioning cloud resources like storage and databases.</li>
-                    <li>Built cloud-agnostic end-to-end test suites to validate microservice functionality at scale.</li>
+                    <li>Led a large-scale migration of legacy infrastructure from AWS to GCP to enable multi-cloud capabilities.</li>
+                    <li>Developed automated build and deployment pipelines for Go, Python, Java, and Node.js across multi-cloud environments.</li>
+                    <li>Managed custom Kubernetes operators for automated provisioning of cloud storage and databases.</li>
+                    <li>Automated FedRAMP-compliant image updates and built cloud-agnostic end-to-end test suites.</li>
+                    <li>Participated in on-call rotation for high-availability production systems.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Sysdig -->
+        <div class="experience-item">
+            <div class="experience-header">
+                <h3>Senior Infrastructure Engineer <span class="company">@ Sysdig</span></h3>
+                <span class="date">2020 - 2021</span>
+            </div>
+            <div class="experience-content">
+                <p>Focused on developer velocity and infrastructure automation for a multi-cloud monitoring platform.</p>
+                <ul>
+                    <li>Migrated JFrog Artifactory to a Kubernetes/S3 architecture, handling 1TB of data with zero downtime.</li>
+                    <li>Built a GitOps pipeline using GitHub Actions to automate Kops cluster provisioning and full-stack deployments.</li>
+                    <li>Integrated <strong>BashBot</strong> for ChatOps, enabling on-demand environment management via Slack.</li>
+                    <li>Participated in on-call rotation for distributed systems across AWS and IBM Cloud.</li>
                 </ul>
             </div>
         </div>
@@ -471,12 +491,42 @@
         <div class="experience-item">
             <div class="experience-content">
                 <ul style="list-style-type: none; margin-left: 0;">
-                    <li style="margin-bottom: 0.5rem;"><strong>Sysdig</strong> — Senior Infrastructure Engineer <span style="float: right; font-size: 0.875rem; color: var(--text-muted);">2020 - 2021</span></li>
-                    <li style="margin-bottom: 0.5rem;"><strong>Eaze</strong> — Senior Infrastructure Engineer <span style="float: right; font-size: 0.875rem; color: var(--text-muted);">2018 - 2020</span></li>
-                    <li style="margin-bottom: 0.5rem;"><strong>Apple</strong> — Full Stack Developer (Marketing / Finance) <span style="float: right; font-size: 0.875rem; color: var(--text-muted);">2015 - 2018</span></li>
-                    <li style="margin-bottom: 0.5rem;"><strong>Hitachi America</strong> — JavaScript Developer <span style="float: right; font-size: 0.875rem; color: var(--text-muted);">2017</span></li>
-                    <li style="margin-bottom: 0.5rem;"><strong>UBM</strong> — Back-End Developer <span style="float: right; font-size: 0.875rem; color: var(--text-muted);">2011 - 2015</span></li>
-                    <li style="margin-bottom: 0.5rem;"><strong>Buck Institute for Research on Aging</strong> — Staff Programmer <span style="float: right; font-size: 0.875rem; color: var(--text-muted);">2009 - 2012</span></li>
+                    <li style="margin-bottom: 1rem;">
+                        <strong>Eaze</strong> — Senior Infrastructure Engineer <span style="float: right; font-size: 0.875rem; color: var(--text-muted);">2018 - 2020</span>
+                        <div style="font-size: 0.8125rem; color: var(--text-muted); margin-top: 0.25rem; line-height: 1.4;">
+                            Transformed legacy, "snowflake" infrastructure into modern, repeatable environments using Terraform. Developed <strong>BashBot</strong> to enable developers to provision and destroy on-demand sandbox environments directly from Slack.
+                        </div>
+                    </li>
+                    <li style="margin-bottom: 1rem;">
+                        <strong>Apple</strong> — Full Stack Developer (Marketing) <span style="float: right; font-size: 0.875rem; color: var(--text-muted);">2017 - 2018</span>
+                        <div style="font-size: 0.8125rem; color: var(--text-muted); margin-top: 0.25rem; line-height: 1.4;">
+                            Stabilized and secured a high-traffic web application while maintaining an internal content management system. Added robust logging and debugging features to facilitate a smooth transition to a new platform.
+                        </div>
+                    </li>
+                    <li style="margin-bottom: 1rem;">
+                        <strong>Hitachi America</strong> — JavaScript Developer <span style="float: right; font-size: 0.875rem; color: var(--text-muted);">2017</span>
+                        <div style="font-size: 0.8125rem; color: var(--text-muted); margin-top: 0.25rem; line-height: 1.4;">
+                            Developed a NodeJS-based user interface for an IoT analytics platform, integrating internal tools with Node-RED to visualize sensor data and device status in real-time.
+                        </div>
+                    </li>
+                    <li style="margin-bottom: 1rem;">
+                        <strong>Apple</strong> — Full Stack Developer (Finance) <span style="float: right; font-size: 0.875rem; color: var(--text-muted);">2015 - 2016</span>
+                        <div style="font-size: 0.8125rem; color: var(--text-muted); margin-top: 0.25rem; line-height: 1.4;">
+                            Built internal secure communication and document-sharing tools using the LAMP stack (CodeIgniter) and Drupal. Developed parallelized data recovery scripts to restore critical information for global finance teams.
+                        </div>
+                    </li>
+                    <li style="margin-bottom: 1rem;">
+                        <strong>UBM</strong> — Back-End Developer <span style="float: right; font-size: 0.875rem; color: var(--text-muted);">2011 - 2015</span>
+                        <div style="font-size: 0.8125rem; color: var(--text-muted); margin-top: 0.25rem; line-height: 1.4;">
+                            Developed the "Schedule Builder" application for major conferences including <strong>Black Hat</strong> and the <strong>Game Developers Conference (GDC)</strong>, enabling thousands of attendees to manage personalized session agendas.
+                        </div>
+                    </li>
+                    <li style="margin-bottom: 1rem;">
+                        <strong>Buck Institute for Research on Aging</strong> — Staff Programmer <span style="float: right; font-size: 0.875rem; color: var(--text-muted);">2009 - 2012</span>
+                        <div style="font-size: 0.8125rem; color: var(--text-muted); margin-top: 0.25rem; line-height: 1.4;">
+                            Automated bioinformatics pipelines and developed web interfaces for molecular response quantification and genomic analysis, directly supporting peer-reviewed research on human aging.
+                        </div>
+                    </li>
                 </ul>
                 <p style="margin-top: 1rem; font-size: 0.75rem; color: var(--text-muted);">
                     During my tenure at the Buck Institute, I co-authored research papers on bioinformatics and aging:
@@ -492,36 +542,41 @@
     <section id="skills" style="background: var(--bg-secondary); max-width: 100%; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); transition: background 0.3s, border 0.3s;">
         <div style="max-width: var(--container-width); margin: 0 auto; padding: 0 1rem;">
             <h2 class="section-title">Skills</h2>
+            <p style="margin-bottom: 2rem; color: var(--text-muted); font-size: 0.95rem; max-width: 800px;">
+                I maintain a hybrid <strong>k3s home lab</strong> across ARM64 and x86_64 nodes, using it as a testing ground for infrastructure-as-code and GitOps. I leverage <strong>Ansible</strong> for cluster provisioning, <strong>ArgoCD</strong> for continuous delivery, and custom <strong>GitHub Action runners</strong> to automate the rendering and deployment of static sites through <strong>Nginx</strong>. The four node kubernetes cluster is comprised of two raspberry pis and two nucs that also hosts various <strong>Slack and Discord bots</strong> I have written (see the Open Source section below).
+            </p>
             <div class="skills-grid">
                 <div class="skill-category">
-                    <h4>Cloud & Orchestration</h4>
+                    <h4>Platform & Infrastructure</h4>
                     <div class="skill-list">
-                        <span class="skill-tag">Kubernetes</span>
-                        <span class="skill-tag">AWS / GCP / Azure</span>
+                        <span class="skill-tag">Kubernetes (EKS / GKE / Kops)</span>
                         <span class="skill-tag">Terraform</span>
+                        <span class="skill-tag">Ansible</span>
                         <span class="skill-tag">Helm</span>
-                        <span class="skill-tag">ArgoCD</span>
-                        <span class="skill-tag">EKS</span>
+                        <span class="skill-tag">Cookiecutter</span>
+                        <span class="skill-tag">JFrog Artifactory</span>
                     </div>
                 </div>
                 <div class="skill-category">
-                    <h4>CI / CD & Tooling</h4>
+                    <h4>Automation & CI/CD</h4>
                     <div class="skill-list">
                         <span class="skill-tag">GitHub Actions</span>
                         <span class="skill-tag">Tekton</span>
-                        <span class="skill-tag">Argo Workflows</span>
+                        <span class="skill-tag">ArgoCD / Workflows</span>
                         <span class="skill-tag">Jenkins</span>
-                        <span class="skill-tag">Sysdig / Falco</span>
-                        <span class="skill-tag">Prometheus</span>
+                        <span class="skill-tag">CircleCI</span>
+                        <span class="skill-tag">Bash Automation</span>
                     </div>
                 </div>
                 <div class="skill-category">
-                    <h4>Languages</h4>
+                    <h4>Languages & Monitoring</h4>
                     <div class="skill-list">
                         <span class="skill-tag">Go</span>
                         <span class="skill-tag">Python</span>
-                        <span class="skill-tag">Bash</span>
                         <span class="skill-tag">JavaScript / Node</span>
+                        <span class="skill-tag">Prometheus</span>
+                        <span class="skill-tag">Grafana</span>
+                        <span class="skill-tag">Sysdig / Falco</span>
                         <span class="skill-tag">PHP</span>
                     </div>
                 </div>
@@ -593,7 +648,6 @@
                 <h4>Morse Code Game <a href="https://github.com/mathew-fleisch/TheHelloWorldMorseCodeGame" target="_blank"><i class="fab fa-github"></i></a></h4>
                 <p>An Arduino-based interactive game that teaches Morse code. Features hardware input/output with real-time encoding and decoding logic.</p>
                 <div class="project-links">
-                    <span class="skill-tag">C++</span>
                     <span class="skill-tag">Arduino</span>
                 </div>
             </div>
@@ -604,6 +658,26 @@
             <h2 class="section-title creative-title">Creative Works</h2>
 
             <div class="creative-layout">
+                <div style="margin-bottom: -2rem;">
+                    <p style="color: #999; margin-bottom: 0.5rem;">
+                        Where engineering meets art. These cinematic timelapses are captured from the <a href="https://www.cbsnews.com/sanfrancisco/salesforce-tower-cameras/" target="_blank" style="color: var(--primary); text-decoration: underline;">CBS/Salesforce Tower webcams</a> in San Francisco, sped up in <strong>iMovie</strong>, and paired with original tracks produced in <strong>Logic Pro</strong>.
+                    </p>
+                    <p style="font-size: 0.875rem;">
+                        View the full collection on my <a href="https://youtube.com/@thedraxiom/videos" target="_blank" style="color: var(--primary); font-weight: 600;"><i class="fab fa-youtube"></i> YouTube Channel</a>.
+                    </p>
+                </div>
+
+                <div class="video-showcase">
+                    <div style="aspect-ratio: 16/9; width: 100%;">
+                        <iframe id="latest-video-iframe" width="100%" height="100%" src="https://www.youtube.com/embed/Cxd-yt0ZpGw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                </div>
+
+                <div class="music-showcase">
+                    <h4 style="font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em; color: #aaa;">Music on Spotify</h4>
+                    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/artist/6yTIT3dvTIdg93squxhNdW?utm_source=generator&theme=0" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                </div>
+
                 <div class="game-showcase">
                     <h4 style="font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em; color: #aaa; margin-bottom: 1.5rem;">Interactive: Column Sorting Game</h4>
                     <p class="codepen" data-height="600" data-slug-hash="powMYVB" data-user="mathew-fleisch" style="height: 600px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
@@ -614,25 +688,11 @@
                     <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
                 </div>
 
-                <p style="margin-bottom: -1rem; color: #999;">Where engineering meets art. Original music paired with cinematic timelapses.</p>
-
-                <div class="video-showcase">
-                    <div style="aspect-ratio: 16/9; width: 100%;">
-                        <iframe id="latest-video-iframe" width="100%" height="100%" src="https://www.youtube.com/embed/Cxd-yt0ZpGw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                    </div>
-                    <div style="padding: 1.5rem;">
-                        <h4 id="latest-video-title" style="margin-bottom: 0.5rem; font-size: 1.125rem;">Latest: 2026.01.01 Bay Bridge Rainbow</h4>
-                        <p style="font-size: 0.875rem; color: #aaa;">View more on my <a href="https://youtube.com/@thedraxiom/videos" target="_blank" style="color: var(--primary);">YouTube Channel</a>.</p>
-                    </div>
-                </div>
-
-                <div class="music-showcase">
-                    <h4 style="font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em; color: #aaa;">Music on Spotify</h4>
-                    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/artist/6yTIT3dvTIdg93squxhNdW?utm_source=generator&theme=0" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                </div>
-
                 <div class="music-showcase">
                     <div class="platform-links">
+                        <a href="https://github.com/mathew-fleisch" target="_blank" class="platform-btn"><i class="fab fa-github"></i> GitHub</a>
+                        <a href="https://linkedin.com/pub/mathew-fleisch/13/610/57a" target="_blank" class="platform-btn"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                        <a href="mailto:mathew.fleisch@gmail.com" class="platform-btn"><i class="fas fa-envelope"></i> Email</a>
                         <a href="https://music.apple.com/us/artist/draxiom/1870941167" target="_blank" class="platform-btn"><i class="fab fa-apple"></i> Apple</a>
                         <a href="https://draxiom.bandcamp.com/" target="_blank" class="platform-btn"><i class="fab fa-bandcamp"></i> Bandcamp</a>
                         <a href="https://www.instagram.com/thedraxiom/" target="_blank" class="platform-btn"><i class="fab fa-instagram"></i> Instagram</a>
