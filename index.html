@@ -154,6 +154,20 @@
             margin-bottom: 1rem;
         }
 
+        .accent {
+            color: var(--primary) !important;
+        }
+
+        .experience-header .company {
+            color: var(--primary) !important;
+            font-weight: 600;
+        }
+
+        /* Ensure career history company names are also blue */
+        .experience-item .experience-content ul li strong.accent {
+            color: var(--primary) !important;
+        }
+
         .hero .accent {
             color: var(--primary);
         }
@@ -390,6 +404,116 @@
             .experience-header { flex-direction: column; }
             .projects-grid { grid-template-columns: 1fr; }
         }
+
+        @media print {
+            header, .theme-toggle, #creative, #projects, #skills, .hero p, .resume-btn, .social-links, footer, .profile-img {
+                display: none !important;
+            }
+            body {
+                padding-top: 0 !important;
+                background-color: #ffffff !important;
+                color: #000000 !important;
+                font-size: 8pt;
+                line-height: 1.25;
+            }
+            section {
+                padding: 0.1rem 0 !important;
+                margin: 0 !important;
+                max-width: 100% !important;
+            }
+            .hero {
+                padding: 0.1rem 0 !important;
+                text-align: center !important;
+            }
+            .hero h1 {
+                font-size: 16pt !important;
+                margin-bottom: 0.1rem !important;
+                text-align: center !important;
+                color: #000000 !important;
+            }
+            .hero .accent {
+                color: #000000 !important;
+            }
+            .hero .subheading {
+                font-size: 10pt !important;
+                margin-bottom: 0.1rem !important;
+                text-align: center !important;
+                color: #000000 !important;
+            }
+            .print-contact {
+                display: block !important;
+                font-size: 9pt !important;
+                margin-bottom: 0.4rem !important;
+                color: #3b82f6 !important;
+                font-weight: 600 !important;
+                text-align: center !important;
+            }
+            .section-title {
+                font-size: 12pt !important;
+                margin-bottom: 0.5rem !important;
+                padding-bottom: 0.1rem !important;
+                border-bottom: 2px solid #3b82f6 !important;
+                color: #000000 !important;
+            }
+            .experience-item {
+                margin-bottom: 0.6rem !important;
+                page-break-inside: avoid;
+            }
+            .experience-header h3 {
+                font-size: 10pt !important;
+                margin-bottom: 0.1rem !important;
+                color: #000000 !important;
+            }
+            .experience-header .company {
+                color: #3b82f6 !important;
+            }
+            .experience-header .date {
+                color: #000000 !important;
+                font-size: 10pt !important;
+                font-weight: 400 !important;
+            }
+            .experience-content p {
+                font-size: 8.5pt !important;
+                margin-bottom: 0.2rem !important;
+                color: #000000 !important;
+            }
+            .experience-content ul {
+                font-size: 8pt !important;
+                margin-bottom: 0.2rem !important;
+                margin-left: 1.3rem !important;
+                color: #000000 !important;
+            }
+            .experience-content li {
+                margin-bottom: 0.1rem !important;
+            }
+            /* Standardize older career history items */
+            .experience-item .experience-content ul[style*="list-style-type: none"] {
+                margin-left: 0 !important;
+                padding-left: 0 !important;
+            }
+            .experience-item ul[style*="list-style-type: none"] li {
+                margin-bottom: 0.5rem !important;
+                color: #000000 !important;
+                font-size: 10pt !important;
+                font-weight: 700 !important;
+            }
+            .experience-item ul[style*="list-style-type: none"] li strong {
+                color: #3b82f6 !important;
+            }
+            .experience-item ul[style*="list-style-type: none"] li span.date {
+                font-weight: 400 !important;
+                color: #000000 !important;
+                font-size: 10pt !important;
+            }
+            .experience-item ul[style*="list-style-type: none"] div {
+                font-size: 8.5pt !important;
+                line-height: 1.25 !important;
+                color: #000000 !important;
+                font-weight: 400 !important;
+                margin-top: 0.1rem !important;
+            }
+            /* Hide PubMed links for strict work-only experience if needed, or keep for context */
+        }
     </style>
 </head>
 <body>
@@ -417,6 +541,9 @@
         <img src="img/avatar.jpg" alt="Mathew Fleisch" class="profile-img">
         <h1>Mathew <span class="accent">Fleisch</span></h1>
         <p class="subheading">Senior Infrastructure & DevOps Engineer from San Francisco</p>
+        <div class="print-contact" style="display: none;">
+            mathewfleisch.com &nbsp;&bull;&nbsp; mathew.fleisch@gmail.com &nbsp;&bull;&nbsp; 415-497-9412
+        </div>
         <p style="max-width: 700px; margin: 0 auto 2.5rem; color: var(--text-muted);">
             Infrastructure and DevOps engineer dedicated to building scalable abstractions, standardizing environments, and streamlining CI/CD pipelines at scale.
             I specialize in creating robust developer tooling and believe that solid testing and automation are the foundation for delivering secure, high-performance software.
@@ -437,7 +564,7 @@
         <!-- Workday - PIE Team -->
         <div class="experience-item">
             <div class="experience-header">
-                <h3>Senior Infrastructure Engineer <span class="company">@ Workday (PIE Team)</span></h3>
+                <h3><span class="company accent">Workday (PIE Team)</span> - Senior Infrastructure Engineer</h3>
                 <span class="date">2023 - Present</span>
             </div>
             <div class="experience-content">
@@ -455,7 +582,7 @@
         <!-- Workday - Scylla Team -->
         <div class="experience-item">
             <div class="experience-header">
-                <h3>Senior Infrastructure Engineer <span class="company">@ Workday (Scylla Team)</span></h3>
+                <h3><span class="company accent">Workday (Scylla Team)</span> - Senior Infrastructure Engineer</h3>
                 <span class="date">2021 - 2023</span>
             </div>
             <div class="experience-content">
@@ -473,7 +600,7 @@
         <!-- Sysdig -->
         <div class="experience-item">
             <div class="experience-header">
-                <h3>Senior Infrastructure Engineer <span class="company">@ Sysdig</span></h3>
+                <h3><span class="company accent">Sysdig</span> - Senior Infrastructure Engineer</h3>
                 <span class="date">2020 - 2021</span>
             </div>
             <div class="experience-content">
@@ -481,7 +608,7 @@
                 <ul>
                     <li>Migrated JFrog Artifactory to a Kubernetes/S3 architecture, handling 1TB of data with zero downtime.</li>
                     <li>Built a GitOps pipeline using GitHub Actions to automate Kops cluster provisioning and full-stack deployments.</li>
-                    <li>Integrated <strong>BashBot</strong> for ChatOps, enabling on-demand environment management via Slack.</li>
+                    <li>Integrated BashBot for ChatOps, enabling on-demand environment management via Slack.</li>
                     <li>Participated in on-call rotation for distributed systems across AWS and IBM Cloud.</li>
                 </ul>
             </div>
@@ -492,37 +619,37 @@
             <div class="experience-content">
                 <ul style="list-style-type: none; margin-left: 0;">
                     <li style="margin-bottom: 1rem;">
-                        <strong>Eaze</strong> — Senior Infrastructure Engineer <span style="float: right; font-size: 0.875rem; color: var(--text-muted);">2018 - 2020</span>
+                        <strong class="accent" style="color: var(--primary);">Eaze</strong> - Senior Infrastructure Engineer <span class="date" style="float: right; font-size: 0.875rem; color: var(--text-muted);">2018 - 2020</span>
                         <div style="font-size: 0.8125rem; color: var(--text-muted); margin-top: 0.25rem; line-height: 1.4;">
-                            Transformed legacy, "snowflake" infrastructure into modern, repeatable environments using Terraform. Developed <strong>BashBot</strong> to enable developers to provision and destroy on-demand sandbox environments directly from Slack.
+                            Transformed legacy, manually managed infrastructure into modern, repeatable environments using Terraform. Developed BashBot to enable developers to provision and destroy on-demand sandbox environments directly from Slack.
                         </div>
                     </li>
                     <li style="margin-bottom: 1rem;">
-                        <strong>Apple</strong> — Full Stack Developer (Marketing) <span style="float: right; font-size: 0.875rem; color: var(--text-muted);">2017 - 2018</span>
+                        <strong class="accent" style="color: var(--primary);">Apple</strong> - Full Stack Developer (Marketing) <span class="date" style="float: right; font-size: 0.875rem; color: var(--text-muted);">2017 - 2018</span>
                         <div style="font-size: 0.8125rem; color: var(--text-muted); margin-top: 0.25rem; line-height: 1.4;">
                             Stabilized and secured a high-traffic web application while maintaining an internal content management system. Added robust logging and debugging features to facilitate a smooth transition to a new platform.
                         </div>
                     </li>
                     <li style="margin-bottom: 1rem;">
-                        <strong>Hitachi America</strong> — JavaScript Developer <span style="float: right; font-size: 0.875rem; color: var(--text-muted);">2017</span>
+                        <strong class="accent" style="color: var(--primary);">Hitachi America</strong> - JavaScript Developer <span class="date" style="float: right; font-size: 0.875rem; color: var(--text-muted);">2017</span>
                         <div style="font-size: 0.8125rem; color: var(--text-muted); margin-top: 0.25rem; line-height: 1.4;">
                             Developed a NodeJS-based user interface for an IoT analytics platform, integrating internal tools with Node-RED to visualize sensor data and device status in real-time.
                         </div>
                     </li>
                     <li style="margin-bottom: 1rem;">
-                        <strong>Apple</strong> — Full Stack Developer (Finance) <span style="float: right; font-size: 0.875rem; color: var(--text-muted);">2015 - 2016</span>
+                        <strong class="accent" style="color: var(--primary);">Apple</strong> - Full Stack Developer (Finance) <span class="date" style="float: right; font-size: 0.875rem; color: var(--text-muted);">2015 - 2016</span>
                         <div style="font-size: 0.8125rem; color: var(--text-muted); margin-top: 0.25rem; line-height: 1.4;">
                             Built internal secure communication and document-sharing tools using the LAMP stack (CodeIgniter) and Drupal. Developed parallelized data recovery scripts to restore critical information for global finance teams.
                         </div>
                     </li>
                     <li style="margin-bottom: 1rem;">
-                        <strong>UBM</strong> — Back-End Developer <span style="float: right; font-size: 0.875rem; color: var(--text-muted);">2011 - 2015</span>
+                        <strong class="accent" style="color: var(--primary);">UBM</strong> - Back-End Developer <span class="date" style="float: right; font-size: 0.875rem; color: var(--text-muted);">2011 - 2015</span>
                         <div style="font-size: 0.8125rem; color: var(--text-muted); margin-top: 0.25rem; line-height: 1.4;">
-                            Developed the "Schedule Builder" application for major conferences including <strong>Black Hat</strong> and the <strong>Game Developers Conference (GDC)</strong>, enabling thousands of attendees to manage personalized session agendas.
+                            Developed the "Schedule Builder" application for major conferences including Black Hat and the Game Developers Conference (GDC), enabling thousands of attendees to manage personalized session agendas.
                         </div>
                     </li>
                     <li style="margin-bottom: 1rem;">
-                        <strong>Buck Institute for Research on Aging</strong> — Staff Programmer <span style="float: right; font-size: 0.875rem; color: var(--text-muted);">2009 - 2012</span>
+                        <strong class="accent" style="color: var(--primary);">Buck Institute for Research on Aging</strong> - Staff Programmer <span class="date" style="float: right; font-size: 0.875rem; color: var(--text-muted);">2009 - 2012</span>
                         <div style="font-size: 0.8125rem; color: var(--text-muted); margin-top: 0.25rem; line-height: 1.4;">
                             Automated bioinformatics pipelines and developed web interfaces for molecular response quantification and genomic analysis, directly supporting peer-reviewed research on human aging.
                         </div>
@@ -532,8 +659,8 @@
                     During my tenure at the Buck Institute, I co-authored research papers on bioinformatics and aging:
                 </p>
                 <ul style="font-size: 0.75rem;">
-                    <li><a href="https://pubmed.ncbi.nlm.nih.gov/23409969/" target="_blank">A systematic evaluation of methods for quantifying collective molecular response</a></li>
-                    <li><a href="https://pubmed.ncbi.nlm.nih.gov/22706384/" target="_blank">The impact of aging on the human genome</a></li>
+                    <li><a href="https://pubmed.ncbi.nlm.nih.gov/23409969/" target="_blank">Stop Using Just GO: A Multi-Ontology Hypothesis Generation Tool for High Throughput Experimentation</a></li>
+                    <li><a href="https://pubmed.ncbi.nlm.nih.gov/22706384/" target="_blank">DEFOG: Discrete Enrichment of Functionally Organized Genes</a></li>
                 </ul>
             </div>
         </div>
