@@ -1,0 +1,48 @@
+name: Regenerate Resume PDF
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'index.html'
+      - 'generate-pdf.js'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'index.html'
+      - 'generate-pdf.js'
+
+jobs:
+  generate-pdf:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: |
+          npm install playwright
+          npx playwright install chromium
+
+      - name: Generate PDF
+        run: node generate-pdf.js
+
+      - name: Commit and push if changed
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add MathewFleischResume.pdf
+          if git diff --staged --quiet; then
+            echo "No changes to PDF"
+          else
+            git commit -m "chore: auto-regenerate resume PDF"
+            git push
+          fi
