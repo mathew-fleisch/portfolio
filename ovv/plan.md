@@ -15,3 +15,4 @@
 ## 2. Next Steps (Future Updates by User)
 - Add complete song lyrics to the lyrics placeholder sections.
 - Add additional MP3 recordings / alternate versions before merging PR #6 (`https://github.com/mathew-fleisch/portfolio/pull/6`).
+https://youtube.com/playlist?list=PLHfL8knEAezg&si=7YPecCzgIAoWFZ-B
