@@ -2,7 +2,21 @@
 <head>
 <title>Our Vinyl Vows - Reunion</title>
 <style>
-		body { font-family: helvetica, arial; width: 680px; margin: 30px auto; color: #333; line-height: 1.4; }
+		body { font-family: helvetica, arial; max-width: 680px; width: 100%; box-sizing: border-box; margin: 20px auto; padding: 0 15px; color: #333; line-height: 1.4; }
+		img { max-width: 100%; height: auto; }
+		iframe { max-width: 100%; }
+		@media (max-width: 700px) {
+			body { margin: 10px auto; padding: 0 10px; }
+			.song-header-info { flex-direction: column; align-items: flex-start; gap: 10px; }
+			.song-bpm { text-align: left; min-width: auto; }
+			.song-player { margin-left: 0; width: 100%; }
+			.song-player audio { width: 100%; }
+			.version-item { flex-direction: column; align-items: flex-start; gap: 8px; }
+			.version-item audio { width: 100%; }
+			.filter-buttons { flex-direction: column; }
+			.filter-buttons button { width: 100%; text-align: center; }
+			iframe { width: 100% !important; height: auto !important; aspect-ratio: 16/9; }
+		}
 		h1 { font-size: 29px; }
 		h2 { font-size: 20px; border-bottom: 2px solid #eee; padding-bottom: 5px; margin-top: 30px; }
 		a { text-decoration: none; color: #0066cc; }
