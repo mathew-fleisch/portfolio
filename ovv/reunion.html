@@ -1,0 +1,899 @@
+<html>
+<head>
+	<title>Our Vinyl Vows - Reunion</title>
+	<style>
+		body { font-family: helvetica, arial; width: 680px; margin: 30px auto; color: #333; line-height: 1.4; }
+		h1 { font-size: 29px; }
+		h2 { font-size: 20px; border-bottom: 2px solid #eee; padding-bottom: 5px; margin-top: 30px; }
+		a { text-decoration: none; color: #0066cc; }
+		a:hover { text-decoration: underline; }
+		.back-link { margin-bottom: 20px; font-size: 14px; }
+		details { background: #f9f9f9; border: 1px solid #ddd; border-radius: 4px; margin-bottom: 10px; padding: 10px 15px; }
+		summary { font-weight: bold; cursor: pointer; font-size: 16px; outline: none; display: flex; justify-content: space-between; align-items: center; }
+		summary::-webkit-details-marker { display: none; }
+		.song-header-info { display: flex; align-items: center; gap: 20px; width: 100%; justify-content: space-between; }
+		.song-title { flex: 1; display: flex; align-items: center; }
+		.song-bpm { font-size: 14px; color: #666; font-weight: normal; min-width: 70px; text-align: right; }
+		.song-player { margin-left: 20px; }
+		audio { height: 32px; vertical-align: middle; }
+		.details-content { margin-top: 15px; padding-top: 15px; border-top: 1px solid #eee; }
+		.version-list { list-style: none; padding: 0; margin: 10px 0; }
+		.version-item { display: flex; justify-content: space-between; align-items: center; background: #fff; border: 1px solid #e0e0e0; padding: 8px 12px; margin-bottom: 6px; border-radius: 3px; font-size: 14px; }
+		.lyrics-section { background: #fff; border: 1px solid #e0e0e0; padding: 12px; margin: 15px 0; border-radius: 3px; font-style: italic; color: #555; }
+		.lyrics-section h4 { margin: 0 0 8px 0; font-style: normal; font-weight: bold; color: #333; }
+		.video-section { margin: 15px 0; }
+		.small { font-size: 80%; color: #777; }
+		.album-icon { width: 18px; height: 18px; vertical-align: middle; margin-left: 8px; border-radius: 2px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+		.song-num { color: #888; margin-right: 10px; min-width: 28px; display: inline-block; font-weight: normal; }
+		.filter-buttons { margin: 20px 0; display: flex; gap: 10px; flex-wrap: wrap; }
+		.filter-buttons button { background: #f0f0f0; border: 1px solid #ccc; padding: 8px 14px; border-radius: 4px; cursor: pointer; font-size: 14px; font-weight: bold; color: #444; }
+		.filter-buttons button:hover { background: #e2e2e2; }
+		.filter-buttons button.active { background: #d0e0ff; border-color: #0066cc; color: #004488; }
+	</style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+	let currentFilter = 'all'; // 'all', 'album-only', 'hide-album'
+	let currentSort = 'alpha'; // 'alpha', 'track'
+
+	function pauseAllAudio() {
+		const audioElements = document.querySelectorAll('audio');
+		audioElements.forEach(audio => {
+			if (!audio.paused) {
+				audio.pause();
+			}
+		});
+	}
+
+	function filterSongs(mode, btnElement) {
+		if (currentFilter === mode) {
+			mode = 'all'; // Clicking active filter twice undoes it
+		}
+
+		pauseAllAudio();
+		currentFilter = mode;
+		currentSort = 'alpha'; // Reset sort to alpha on filter change
+		const sortBtn = document.getElementById('sort-track-btn');
+		
+		document.getElementById('container-track').style.display = 'none';
+		document.getElementById('container-alpha').style.display = 'block';
+
+		const alphaAlbum = document.querySelectorAll('#container-alpha .album-song');
+		const alphaNonAlbum = document.querySelectorAll('#container-alpha .non-album-song');
+
+		// Update active button classes
+		document.querySelectorAll('.filter-buttons button').forEach(b => {
+			if (b.id !== 'sort-track-btn') b.classList.remove('active');
+		});
+
+		if (mode === 'hide-album') {
+			alphaAlbum.forEach(el => el.style.display = 'none');
+			alphaNonAlbum.forEach(el => el.style.display = 'block');
+			sortBtn.style.display = 'none';
+			if (btnElement) btnElement.classList.add('active');
+		} else if (mode === 'album-only') {
+			alphaAlbum.forEach(el => el.style.display = 'block');
+			alphaNonAlbum.forEach(el => el.style.display = 'none');
+			sortBtn.style.display = 'inline-block';
+			sortBtn.textContent = 'Sort by Track Order';
+			if (btnElement) btnElement.classList.add('active');
+		} else if (mode === 'all') {
+			alphaAlbum.forEach(el => el.style.display = 'block');
+			alphaNonAlbum.forEach(el => el.style.display = 'block');
+			sortBtn.style.display = 'none';
+		}
+
+		updateRowNumbers();
+	}
+
+	function toggleSort() {
+		pauseAllAudio();
+		const sortBtn = document.getElementById('sort-track-btn');
+		const alphaContainer = document.getElementById('container-alpha');
+		const trackContainer = document.getElementById('container-track');
+
+		if (currentSort === 'alpha') {
+			currentSort = 'track';
+			alphaContainer.style.display = 'none';
+			trackContainer.style.display = 'block';
+			sortBtn.textContent = 'Sort Alphabetical';
+		} else {
+			currentSort = 'alpha';
+			trackContainer.style.display = 'none';
+			alphaContainer.style.display = 'block';
+			sortBtn.textContent = 'Sort by Track Order';
+		}
+		updateRowNumbers();
+	}
+
+	function updateRowNumbers() {
+		const activeContainer = currentSort === 'track' ? document.getElementById('container-track') : document.getElementById('container-alpha');
+		const rows = activeContainer.querySelectorAll('details');
+		let visibleIndex = 1;
+		rows.forEach(el => {
+			if (el.style.display !== 'none') {
+				const numSpan = el.querySelector('.song-num');
+				if (numSpan) {
+					numSpan.textContent = String(visibleIndex).padStart(2, '0') + '.';
+					visibleIndex++;
+				}
+			}
+		});
+	}
+
+	window.addEventListener('DOMContentLoaded', () => {
+		filterSongs('all');
+	});
+</script>
+</head>
+<body>
+
+<div class="back-link">
+	<a href="index.html">&larr; Back to Main Album Page</a>
+</div>
+
+<h1><a href="https://www.facebook.com/ourvinylvows/" target="_blank">Our Vinyl Vows</a> - Reunion Song Archive</h1>
+<p>Explore all recorded versions, BPM data, lyrics, and live video performances for each song (19 songs total), sorted alphabetically. Songs marked with <img src="albumcover.jpg" class="album-icon" title="Main Album Track" /> are from the main album <em>You, Me and Einstein</em>.</p>
+
+<div class="filter-buttons">
+	<button onclick="filterSongs('hide-album', this)">Hide Album Songs</button>
+	<button onclick="filterSongs('album-only', this)">Show Album Songs Only</button>
+	<button onclick="filterSongs('all', this)">Show All</button>
+	<button id="sort-track-btn" onclick="toggleSort()" style="display: none;">Sort by Track Order</button>
+</div>
+
+<hr />
+
+<!-- CONTAINER 1: ALPHABETICAL ORDER -->
+<div id="container-alpha" class="song-list">
+
+	<!-- Almond Joy -->
+	<details class="non-album-song">
+		<summary>
+			<div class="song-header-info">
+				<span class="song-title"><span class="song-num">01.</span> Almond Joy</span>
+				<span class="song-bpm">BPM: 152</span>
+				<div class="song-player" onclick="event.stopPropagation();">
+					<audio controls src="other/2013.06.25_Practice/03_Almond_Joy.mp3"></audio>
+				</div>
+			</div>
+		</summary>
+		<div class="details-content">
+			<strong>Recorded Versions (Newest First):</strong>
+			<ul class="version-list">
+				<li class="version-item"><span>Practice (2013.06.25)</span> <audio controls src="other/2013.06.25_Practice/03_Almond_Joy.mp3"></audio></li>
+				<li class="version-item"><span>Homestead Lanes Live (2013.03.24)</span> <audio controls src="other/20130324_HomestedLanes/02_Almond_Joy.mp3"></audio></li>
+				<li class="version-item"><span>EP Rough</span> <audio controls src="other/EP_Rough/02_Almond_Joy.m4a"></audio></li>
+				<li class="version-item"><span>Arlene Francis Center Live (2012.07.27)</span> <audio controls src="other/20120727_ArleneFrancisCenter/03_Almond_Joy.mp3"></audio></li>
+			</ul>
+			<div class="lyrics-section">
+				<h4>Lyrics</h4>
+				<p>[Lyrics coming soon]</p>
+			</div>
+		</div>
+	</details>
+
+	<!-- Almond Roca -->
+	<details class="album-song">
+		<summary>
+			<div class="song-header-info">
+				<span class="song-title"><span class="song-num">02.</span> Almond Roca <img src="albumcover.jpg" class="album-icon" title="Main Album Track" /></span>
+				<span class="song-bpm">BPM: 193</span>
+				<div class="song-player" onclick="event.stopPropagation();">
+					<audio controls src="06_Almond_Roca.mp3"></audio>
+				</div>
+			</div>
+		</summary>
+		<div class="details-content">
+			<strong>Recorded Versions (Newest First):</strong>
+			<ul class="version-list">
+				<li class="version-item"><span>Practice (2013.06.25)</span> <audio controls src="other/2013.06.25_Practice/02_Almond_Roca.mp3"></audio></li>
+				<li class="version-item"><span>Homestead Lanes Live (2013.03.24)</span> <audio controls src="other/20130324_HomestedLanes/01_Almond_Roca.mp3"></audio></li>
+				<li class="version-item"><span>Main Album Version (2013)</span> <audio controls src="06_Almond_Roca.mp3"></audio></li>
+				<li class="version-item"><span>Arlene Francis Center Live (2012.07.27)</span> <audio controls src="other/20120727_ArleneFrancisCenter/10_Almond_Roca.mp3"></audio></li>
+				<li class="version-item"><span>Trinity Gold Media Live (2011.10.14)</span> <audio controls src="other/20111014_TrinityGoldMedia/01_Almond_Roca.mp3"></audio></li>
+			</ul>
+			<div class="lyrics-section">
+				<h4>Lyrics</h4>
+				<p>[Lyrics coming soon]</p>
+			</div>
+			<div class="video-section">
+				<h4>Music Video / Live Performance</h4>
+				<iframe width="560" height="315" src="https://www.youtube.com/embed/sxcrZgxsMxY" frameborder="0" allowfullscreen></iframe>
+			</div>
+		</div>
+	</details>
+
+	<!-- A New Hope -->
+	<details class="album-song">
+		<summary>
+			<div class="song-header-info">
+				<span class="song-title"><span class="song-num">03.</span> A New Hope <img src="albumcover.jpg" class="album-icon" title="Main Album Track" /></span>
+				<span class="song-bpm">BPM: 186</span>
+				<div class="song-player" onclick="event.stopPropagation();">
+					<audio controls src="04_A_New_Hope.mp3"></audio>
+				</div>
+			</div>
+		</summary>
+		<div class="details-content">
+			<strong>Recorded Versions (Newest First):</strong>
+			<ul class="version-list">
+				<li class="version-item"><span>Practice (2013.06.25)</span> <audio controls src="other/2013.06.25_Practice/05_A_New_Hope.mp3"></audio></li>
+				<li class="version-item"><span>Main Album Version (2013)</span> <audio controls src="04_A_New_Hope.mp3"></audio></li>
+				<li class="version-item"><span>Arlene Francis Center Live (2012.07.27)</span> <audio controls src="other/20120727_ArleneFrancisCenter/09_A_New_Hope.mp3"></audio></li>
+			</ul>
+			<div class="lyrics-section">
+				<h4>Lyrics</h4>
+				<p>[Lyrics coming soon]</p>
+			</div>
+			<div class="video-section">
+				<h4>Music Video / Live Performance</h4>
+				<iframe width="560" height="315" src="https://www.youtube.com/embed/_UzDPJE9WRQ" frameborder="0" allowfullscreen></iframe>
+			</div>
+		</div>
+	</details>
+
+	<!-- Banana Hammock -->
+	<details class="non-album-song">
+		<summary>
+			<div class="song-header-info">
+				<span class="song-title"><span class="song-num">04.</span> Banana Hammock</span>
+				<span class="song-bpm">BPM: 196</span>
+				<div class="song-player" onclick="event.stopPropagation();">
+					<span class="small">No audio recording</span>
+				</div>
+			</div>
+		</summary>
+		<div class="details-content">
+			<strong>Recorded Versions (Newest First):</strong>
+			<p class="small">No audio recordings available.</p>
+			<div class="lyrics-section">
+				<h4>Lyrics</h4>
+				<p>[Lyrics coming soon]</p>
+			</div>
+		</div>
+	</details>
+
+	<!-- Brainfed -->
+	<details class="non-album-song">
+		<summary>
+			<div class="song-header-info">
+				<span class="song-title"><span class="song-num">05.</span> Brainfed</span>
+				<span class="song-bpm">BPM: 191</span>
+				<div class="song-player" onclick="event.stopPropagation();">
+					<audio controls src="other/Brainfed.m4a"></audio>
+				</div>
+			</div>
+		</summary>
+		<div class="details-content">
+			<strong>Recorded Versions (Newest First):</strong>
+			<ul class="version-list">
+				<li class="version-item"><span>Standalone Track</span> <audio controls src="other/Brainfed.m4a"></audio></li>
+				<li class="version-item"><span>EP Rough</span> <audio controls src="other/EP_Rough/05_Brainfed.m4a"></audio></li>
+				<li class="version-item"><span>Arlene Francis Center Live (2012.07.27)</span> <audio controls src="other/20120727_ArleneFrancisCenter/08_Brainfed.mp3"></audio></li>
+				<li class="version-item"><span>Trinity Gold Media Live (2011.10.14)</span> <audio controls src="other/20111014_TrinityGoldMedia/06_Brainfed.mp3"></audio></li>
+			</ul>
+			<div class="lyrics-section">
+				<h4>Lyrics</h4>
+				<p>[Lyrics coming soon]</p>
+			</div>
+			<div class="video-section">
+				<h4>Music Video / Live Performance</h4>
+				<iframe width="560" height="315" src="https://www.youtube.com/embed/tztVcsT1AUw" frameborder="0" allowfullscreen></iframe>
+				<br><br>
+				<iframe width="560" height="315" src="https://www.youtube.com/embed/2aOT75rwj7Y" frameborder="0" allowfullscreen></iframe>
+			</div>
+		</div>
+	</details>
+
+	<!-- Dancing Like Walken -->
+	<details class="non-album-song">
+		<summary>
+			<div class="song-header-info">
+				<span class="song-title"><span class="song-num">06.</span> Dancing Like Walken</span>
+				<span class="song-bpm">BPM: 102</span>
+				<div class="song-player" onclick="event.stopPropagation();">
+					<audio controls src="other/2013.06.25_Practice/09_Dancing_Like_Walken.mp3"></audio>
+				</div>
+			</div>
+		</summary>
+		<div class="details-content">
+			<strong>Recorded Versions (Newest First):</strong>
+			<ul class="version-list">
+				<li class="version-item"><span>Practice (2013.06.25)</span> <audio controls src="other/2013.06.25_Practice/09_Dancing_Like_Walken.mp3"></audio></li>
+				<li class="version-item"><span>Other Track</span> <audio controls src="other/Dancing_Like_Walken.mp3"></audio></li>
+			</ul>
+			<div class="lyrics-section">
+				<h4>Lyrics</h4>
+				<p>[Lyrics coming soon]</p>
+			</div>
+		</div>
+	</details>
+
+	<!-- Digital Jockey -->
+	<details class="non-album-song">
+		<summary>
+			<div class="song-header-info">
+				<span class="song-title"><span class="song-num">07.</span> Digital Jockey</span>
+				<span class="song-bpm">BPM: </span>
+				<div class="song-player" onclick="event.stopPropagation();">
+					<audio controls src="other/2013.06.25_Practice/08_Digital_Jockey.mp3"></audio>
+				</div>
+			</div>
+		</summary>
+		<div class="details-content">
+			<strong>Recorded Versions (Newest First):</strong>
+			<ul class="version-list">
+				<li class="version-item"><span>Practice (2013.06.25)</span> <audio controls src="other/2013.06.25_Practice/08_Digital_Jockey.mp3"></audio></li>
+				<li class="version-item"><span>Other Track</span> <audio controls src="other/Digital_Jockey.mp3"></audio></li>
+			</ul>
+			<div class="lyrics-section">
+				<h4>Lyrics</h4>
+				<p>[Lyrics coming soon]</p>
+			</div>
+		</div>
+	</details>
+
+	<!-- Gone -->
+	<details class="album-song">
+		<summary>
+			<div class="song-header-info">
+				<span class="song-title"><span class="song-num">08.</span> Gone <img src="albumcover.jpg" class="album-icon" title="Main Album Track" /></span>
+				<span class="song-bpm">BPM: 192</span>
+				<div class="song-player" onclick="event.stopPropagation();">
+					<audio controls src="03_Gone.mp3"></audio>
+				</div>
+			</div>
+		</summary>
+		<div class="details-content">
+			<strong>Recorded Versions (Newest First):</strong>
+			<ul class="version-list">
+				<li class="version-item"><span>Homestead Lanes Live (2013.03.24)</span> <audio controls src="other/20130324_HomestedLanes/07_Gone.mp3"></audio></li>
+				<li class="version-item"><span>Main Album Version (2013)</span> <audio controls src="03_Gone.mp3"></audio></li>
+				<li class="version-item"><span>Arlene Francis Center Live (2012.07.27)</span> <audio controls src="other/20120727_ArleneFrancisCenter/07_Gone.mp3"></audio></li>
+				<li class="version-item"><span>Trinity Gold Media Live (2011.10.14)</span> <audio controls src="other/20111014_TrinityGoldMedia/05_Gone.mp3"></audio></li>
+			</ul>
+			<div class="lyrics-section">
+				<h4>Lyrics</h4>
+				<p>[Lyrics coming soon]</p>
+			</div>
+			<div class="video-section">
+				<h4>Music Video / Live Performance</h4>
+				<iframe width="560" height="315" src="https://www.youtube.com/embed/ksUXiIoYndk" frameborder="0" allowfullscreen></iframe>
+			</div>
+		</div>
+	</details>
+
+	<!-- Hell of a Way to Die -->
+	<details class="album-song">
+		<summary>
+			<div class="song-header-info">
+				<span class="song-title"><span class="song-num">09.</span> Hell of a Way to Die <img src="albumcover.jpg" class="album-icon" title="Main Album Track" /></span>
+				<span class="song-bpm">BPM: 173</span>
+				<div class="song-player" onclick="event.stopPropagation();">
+					<audio controls src="07_Hell_of_a_Way_to Die.mp3"></audio>
+				</div>
+			</div>
+		</summary>
+		<div class="details-content">
+			<strong>Recorded Versions (Newest First):</strong>
+			<ul class="version-list">
+				<li class="version-item"><span>Practice (2013.06.25)</span> <audio controls src="other/2013.06.25_Practice/04_Hell_Of_a_Way_to_Die.mp3"></audio></li>
+				<li class="version-item"><span>Homestead Lanes Live (2013.03.24)</span> <audio controls src="other/20130324_HomestedLanes/03_Hell_of_a_Way_to_Die.mp3"></audio></li>
+				<li class="version-item"><span>Main Album Version (2013)</span> <audio controls src="07_Hell_of_a_Way_to Die.mp3"></audio></li>
+				<li class="version-item"><span>Arlene Francis Center Live (2012.07.27)</span> <audio controls src="other/20120727_ArleneFrancisCenter/01_Hell_of_a_Way_to_Die.mp3"></audio></li>
+				<li class="version-item"><span>Trinity Gold Media Live (2011.10.14)</span> <audio controls src="other/20111014_TrinityGoldMedia/02_Hell_of_a_Way_to_Die.mp3"></audio></li>
+			</ul>
+			<div class="lyrics-section">
+				<h4>Lyrics</h4>
+				<p>[Lyrics coming soon]</p>
+			</div>
+			<div class="video-section">
+				<h4>Music Video / Live Performance</h4>
+				<iframe width="560" height="315" src="https://www.youtube.com/embed/FTMUG1agbLI" frameborder="0" allowfullscreen></iframe>
+			</div>
+		</div>
+	</details>
+
+	<!-- Just Because -->
+	<details class="album-song">
+		<summary>
+			<div class="song-header-info">
+				<span class="song-title"><span class="song-num">10.</span> Just Because <img src="albumcover.jpg" class="album-icon" title="Main Album Track" /></span>
+				<span class="song-bpm">BPM: </span>
+				<div class="song-player" onclick="event.stopPropagation();">
+					<audio controls src="05_Just_Because.mp3"></audio>
+				</div>
+			</div>
+		</summary>
+		<div class="details-content">
+			<strong>Recorded Versions (Newest First):</strong>
+			<ul class="version-list">
+				<li class="version-item"><span>Main Album Version (2013)</span> <audio controls src="05_Just_Because.mp3"></audio></li>
+			</ul>
+			<div class="lyrics-section">
+				<h4>Lyrics</h4>
+				<p>[Lyrics coming soon]</p>
+			</div>
+		</div>
+	</details>
+
+	<!-- Just the Tip -->
+	<details class="album-song">
+		<summary>
+			<div class="song-header-info">
+				<span class="song-title"><span class="song-num">11.</span> Just the Tip <img src="albumcover.jpg" class="album-icon" title="Main Album Track" /></span>
+				<span class="song-bpm">BPM: 184</span>
+				<div class="song-player" onclick="event.stopPropagation();">
+					<audio controls src="01_Just_The_Tip.mp3"></audio>
+				</div>
+			</div>
+		</summary>
+		<div class="details-content">
+			<strong>Recorded Versions (Newest First):</strong>
+			<ul class="version-list">
+				<li class="version-item"><span>Homestead Lanes Live (2013.03.24)</span> <audio controls src="other/20130324_HomestedLanes/05_Just_the_Tip.mp3"></audio></li>
+				<li class="version-item"><span>Main Album Version (2013)</span> <audio controls src="01_Just_The_Tip.mp3"></audio></li>
+				<li class="version-item"><span>Arlene Francis Center Live (2012.07.27)</span> <audio controls src="other/20120727_ArleneFrancisCenter/06_Just_the_Tip.mp3"></audio></li>
+				<li class="version-item"><span>Trinity Gold Media Live (2011.10.14)</span> <audio controls src="other/20111014_TrinityGoldMedia/03_Just_the_tip.mp3"></audio></li>
+			</ul>
+			<div class="lyrics-section">
+				<h4>Lyrics</h4>
+				<p>[Lyrics coming soon]</p>
+			</div>
+		</div>
+	</details>
+
+	<!-- Knock Me Out -->
+	<details class="non-album-song">
+		<summary>
+			<div class="song-header-info">
+				<span class="song-title"><span class="song-num">12.</span> Knock Me Out</span>
+				<span class="song-bpm">BPM: </span>
+				<div class="song-player" onclick="event.stopPropagation();">
+					<audio controls src="other/EP_Rough/03_Knock_Me_Out.m4a"></audio>
+				</div>
+			</div>
+		</summary>
+		<div class="details-content">
+			<strong>Recorded Versions (Newest First):</strong>
+			<ul class="version-list">
+				<li class="version-item"><span>EP Rough</span> <audio controls src="other/EP_Rough/03_Knock_Me_Out.m4a"></audio></li>
+				<li class="version-item"><span>Trinity Gold Media Live (2011.10.14)</span> <audio controls src="other/20111014_TrinityGoldMedia/04_Knock_Me_Out.mp3"></audio></li>
+			</ul>
+			<div class="lyrics-section">
+				<h4>Lyrics</h4>
+				<p>[Lyrics coming soon]</p>
+			</div>
+		</div>
+	</details>
+
+	<!-- Pandemonium -->
+	<details class="non-album-song">
+		<summary>
+			<div class="song-header-info">
+				<span class="song-title"><span class="song-num">13.</span> Pandemonium</span>
+				<span class="song-bpm">BPM: </span>
+				<div class="song-player" onclick="event.stopPropagation();">
+					<audio controls src="other/2013.06.25_Practice/07_Pandemonium.mp3"></audio>
+				</div>
+			</div>
+		</summary>
+		<div class="details-content">
+			<strong>Recorded Versions (Newest First):</strong>
+			<ul class="version-list">
+				<li class="version-item"><span>Practice (2013.06.25)</span> <audio controls src="other/2013.06.25_Practice/07_Pandemonium.mp3"></audio></li>
+				<li class="version-item"><span>Homestead Lanes Live (2013.03.24)</span> <audio controls src="other/20130324_HomestedLanes/06_Pandemonium.mp3"></audio></li>
+				<li class="version-item"><span>EP Rough</span> <audio controls src="other/EP_Rough/04_Pandemonium.m4a"></audio></li>
+				<li class="version-item"><span>Arlene Francis Center Live (2012.07.27)</span> <audio controls src="other/20120727_ArleneFrancisCenter/05_Pandemonium.mp3"></audio></li>
+			</ul>
+			<div class="lyrics-section">
+				<h4>Lyrics</h4>
+				<p>[Lyrics coming soon]</p>
+			</div>
+		</div>
+	</details>
+
+	<!-- Secret Santa -->
+	<details class="non-album-song">
+		<summary>
+			<div class="song-header-info">
+				<span class="song-title"><span class="song-num">14.</span> Secret Santa</span>
+				<span class="song-bpm">BPM: </span>
+				<div class="song-player" onclick="event.stopPropagation();">
+					<audio controls src="other/Secret_Santa.mp3"></audio>
+				</div>
+			</div>
+		</summary>
+		<div class="details-content">
+			<strong>Recorded Versions (Newest First):</strong>
+			<ul class="version-list">
+				<li class="version-item"><span>Other Track</span> <audio controls src="other/Secret_Santa.mp3"></audio></li>
+			</ul>
+			<div class="lyrics-section">
+				<h4>Lyrics</h4>
+				<p>[Lyrics coming soon]</p>
+			</div>
+			<div class="video-section">
+				<h4>Music Video / Live Performance</h4>
+				<iframe width="560" height="315" src="https://www.youtube.com/embed/OmH1cobPFWY" frameborder="0" allowfullscreen></iframe>
+			</div>
+		</div>
+	</details>
+
+	<!-- Sticks and Stones -->
+	<details class="non-album-song">
+		<summary>
+			<div class="song-header-info">
+				<span class="song-title"><span class="song-num">15.</span> Sticks and Stones</span>
+				<span class="song-bpm">BPM: </span>
+				<div class="song-player" onclick="event.stopPropagation();">
+					<audio controls src="other/2013.06.25_Practice/01_Sticks_and_Stones.mp3"></audio>
+				</div>
+			</div>
+		</summary>
+		<div class="details-content">
+			<strong>Recorded Versions (Newest First):</strong>
+			<ul class="version-list">
+				<li class="version-item"><span>Practice (2013.06.25)</span> <audio controls src="other/2013.06.25_Practice/01_Sticks_and_Stones.mp3"></audio></li>
+				<li class="version-item"><span>EP Rough</span> <audio controls src="other/EP_Rough/01_Sticks_And_Stones.m4a"></audio></li>
+				<li class="version-item"><span>Arlene Francis Center Live (2012.07.27)</span> <audio controls src="other/20120727_ArleneFrancisCenter/02_Sticks_and_Stones.mp3"></audio></li>
+			</ul>
+			<div class="lyrics-section">
+				<h4>Lyrics</h4>
+				<p>[Lyrics coming soon]</p>
+			</div>
+		</div>
+	</details>
+
+	<!-- The Demon Within -->
+	<details class="album-song">
+		<summary>
+			<div class="song-header-info">
+				<span class="song-title"><span class="song-num">16.</span> The Demon Within <img src="albumcover.jpg" class="album-icon" title="Main Album Track" /></span>
+				<span class="song-bpm">BPM: 161</span>
+				<div class="song-player" onclick="event.stopPropagation();">
+					<audio controls src="09_The_Demon_Within.mp3"></audio>
+				</div>
+			</div>
+		</summary>
+		<div class="details-content">
+			<strong>Recorded Versions (Newest First):</strong>
+			<ul class="version-list">
+				<li class="version-item"><span>Main Album Version (2013)</span> <audio controls src="09_The_Demon_Within.mp3"></audio></li>
+				<li class="version-item"><span>Trinity Gold Media Live (2011.10.14)</span> <audio controls src="other/20111014_TrinityGoldMedia/07_The_Demon_Within.mp3"></audio></li>
+			</ul>
+			<div class="lyrics-section">
+				<h4>Lyrics</h4>
+				<p>[Lyrics coming soon]</p>
+			</div>
+		</div>
+	</details>
+
+	<!-- The Devils Casino -->
+	<details class="album-song">
+		<summary>
+			<div class="song-header-info">
+				<span class="song-title"><span class="song-num">17.</span> The Devils Casino <img src="albumcover.jpg" class="album-icon" title="Main Album Track" /></span>
+				<span class="song-bpm">BPM: 144</span>
+				<div class="song-player" onclick="event.stopPropagation();">
+					<audio controls src="08_The_Devils_Casino.mp3"></audio>
+				</div>
+			</div>
+		</summary>
+		<div class="details-content">
+			<strong>Recorded Versions (Newest First):</strong>
+			<ul class="version-list">
+				<li class="version-item"><span>Main Album Version (2013)</span> <audio controls src="08_The_Devils_Casino.mp3"></audio></li>
+			</ul>
+			<div class="lyrics-section">
+				<h4>Lyrics</h4>
+				<p>[Lyrics coming soon]</p>
+			</div>
+		</div>
+	</details>
+
+	<!-- Two Weeks Notice -->
+	<details class="album-song">
+		<summary>
+			<div class="song-header-info">
+				<span class="song-title"><span class="song-num">18.</span> Two Weeks Notice <img src="albumcover.jpg" class="album-icon" title="Main Album Track" /></span>
+				<span class="song-bpm">BPM: 75</span>
+				<div class="song-player" onclick="event.stopPropagation();">
+					<audio controls src="02_Two_Weeks.mp3"></audio>
+				</div>
+			</div>
+		</summary>
+		<div class="details-content">
+			<strong>Recorded Versions (Newest First):</strong>
+			<ul class="version-list">
+				<li class="version-item"><span>Main Album Version (2013)</span> <audio controls src="02_Two_Weeks.mp3"></audio></li>
+				<li class="version-item"><span>Arlene Francis Center Live (2012.07.27)</span> <audio controls src="other/20120727_ArleneFrancisCenter/04_Two_Weeks_Notice.mp3"></audio></li>
+			</ul>
+			<div class="lyrics-section">
+				<h4>Lyrics</h4>
+				<p>[Lyrics coming soon]</p>
+			</div>
+		</div>
+	</details>
+
+	<!-- Wounded Deer -->
+	<details class="non-album-song">
+		<summary>
+			<div class="song-header-info">
+				<span class="song-title"><span class="song-num">19.</span> Wounded Deer</span>
+				<span class="song-bpm">BPM: 140</span>
+				<div class="song-player" onclick="event.stopPropagation();">
+					<audio controls src="other/2013.06.25_Practice/06_Wounded_Deer.mp3"></audio>
+				</div>
+			</div>
+		</summary>
+		<div class="details-content">
+			<strong>Recorded Versions (Newest First):</strong>
+			<ul class="version-list">
+				<li class="version-item"><span>Practice (2013.06.25)</span> <audio controls src="other/2013.06.25_Practice/06_Wounded_Deer.mp3"></audio></li>
+				<li class="version-item"><span>Homestead Lanes Live (2013.03.24)</span> <audio controls src="other/20130324_HomestedLanes/04_Wounded_Deer.mp3"></audio></li>
+			</ul>
+			<div class="lyrics-section">
+				<h4>Lyrics</h4>
+				<p>[Lyrics coming soon]</p>
+			</div>
+		</div>
+	</details>
+
+</div>
+
+
+<!-- CONTAINER 2: ORIGINAL ALBUM TRACK ORDER (1 to 9) -->
+<div id="container-track" class="song-list" style="display: none;">
+
+	<!-- Track 1: Just the Tip -->
+	<details class="album-song">
+		<summary>
+			<div class="song-header-info">
+				<span class="song-title"><span class="song-num">01.</span> Just the Tip <img src="albumcover.jpg" class="album-icon" title="Main Album Track" /></span>
+				<span class="song-bpm">BPM: 184</span>
+				<div class="song-player" onclick="event.stopPropagation();">
+					<audio controls src="01_Just_The_Tip.mp3"></audio>
+				</div>
+			</div>
+		</summary>
+		<div class="details-content">
+			<strong>Recorded Versions (Newest First):</strong>
+			<ul class="version-list">
+				<li class="version-item"><span>Homestead Lanes Live (2013.03.24)</span> <audio controls src="other/20130324_HomestedLanes/05_Just_the_Tip.mp3"></audio></li>
+				<li class="version-item"><span>Main Album Version (2013)</span> <audio controls src="01_Just_The_Tip.mp3"></audio></li>
+				<li class="version-item"><span>Arlene Francis Center Live (2012.07.27)</span> <audio controls src="other/20120727_ArleneFrancisCenter/06_Just_the_Tip.mp3"></audio></li>
+				<li class="version-item"><span>Trinity Gold Media Live (2011.10.14)</span> <audio controls src="other/20111014_TrinityGoldMedia/03_Just_the_tip.mp3"></audio></li>
+			</ul>
+			<div class="lyrics-section">
+				<h4>Lyrics</h4>
+				<p>[Lyrics coming soon]</p>
+			</div>
+		</div>
+	</details>
+
+	<!-- Track 2: Two Weeks Notice -->
+	<details class="album-song">
+		<summary>
+			<div class="song-header-info">
+				<span class="song-title"><span class="song-num">02.</span> Two Weeks Notice <img src="albumcover.jpg" class="album-icon" title="Main Album Track" /></span>
+				<span class="song-bpm">BPM: 75</span>
+				<div class="song-player" onclick="event.stopPropagation();">
+					<audio controls src="02_Two_Weeks.mp3"></audio>
+				</div>
+			</div>
+		</summary>
+		<div class="details-content">
+			<strong>Recorded Versions (Newest First):</strong>
+			<ul class="version-list">
+				<li class="version-item"><span>Main Album Version (2013)</span> <audio controls src="02_Two_Weeks.mp3"></audio></li>
+				<li class="version-item"><span>Arlene Francis Center Live (2012.07.27)</span> <audio controls src="other/20120727_ArleneFrancisCenter/04_Two_Weeks_Notice.mp3"></audio></li>
+			</ul>
+			<div class="lyrics-section">
+				<h4>Lyrics</h4>
+				<p>[Lyrics coming soon]</p>
+			</div>
+		</div>
+	</details>
+
+	<!-- Track 3: Gone -->
+	<details class="album-song">
+		<summary>
+			<div class="song-header-info">
+				<span class="song-title"><span class="song-num">03.</span> Gone <img src="albumcover.jpg" class="album-icon" title="Main Album Track" /></span>
+				<span class="song-bpm">BPM: 192</span>
+				<div class="song-player" onclick="event.stopPropagation();">
+					<audio controls src="03_Gone.mp3"></audio>
+				</div>
+			</div>
+		</summary>
+		<div class="details-content">
+			<strong>Recorded Versions (Newest First):</strong>
+			<ul class="version-list">
+				<li class="version-item"><span>Homestead Lanes Live (2013.03.24)</span> <audio controls src="other/20130324_HomestedLanes/07_Gone.mp3"></audio></li>
+				<li class="version-item"><span>Main Album Version (2013)</span> <audio controls src="03_Gone.mp3"></audio></li>
+				<li class="version-item"><span>Arlene Francis Center Live (2012.07.27)</span> <audio controls src="other/20120727_ArleneFrancisCenter/07_Gone.mp3"></audio></li>
+				<li class="version-item"><span>Trinity Gold Media Live (2011.10.14)</span> <audio controls src="other/20111014_TrinityGoldMedia/05_Gone.mp3"></audio></li>
+			</ul>
+			<div class="lyrics-section">
+				<h4>Lyrics</h4>
+				<p>[Lyrics coming soon]</p>
+			</div>
+			<div class="video-section">
+				<h4>Music Video / Live Performance</h4>
+				<iframe width="560" height="315" src="https://www.youtube.com/embed/ksUXiIoYndk" frameborder="0" allowfullscreen></iframe>
+			</div>
+		</div>
+	</details>
+
+	<!-- Track 4: A New Hope -->
+	<details class="album-song">
+		<summary>
+			<div class="song-header-info">
+				<span class="song-title"><span class="song-num">04.</span> A New Hope <img src="albumcover.jpg" class="album-icon" title="Main Album Track" /></span>
+				<span class="song-bpm">BPM: 186</span>
+				<div class="song-player" onclick="event.stopPropagation();">
+					<audio controls src="04_A_New_Hope.mp3"></audio>
+				</div>
+			</div>
+		</summary>
+		<div class="details-content">
+			<strong>Recorded Versions (Newest First):</strong>
+			<ul class="version-list">
+				<li class="version-item"><span>Practice (2013.06.25)</span> <audio controls src="other/2013.06.25_Practice/05_A_New_Hope.mp3"></audio></li>
+				<li class="version-item"><span>Main Album Version (2013)</span> <audio controls src="04_A_New_Hope.mp3"></audio></li>
+				<li class="version-item"><span>Arlene Francis Center Live (2012.07.27)</span> <audio controls src="other/20120727_ArleneFrancisCenter/09_A_New_Hope.mp3"></audio></li>
+			</ul>
+			<div class="lyrics-section">
+				<h4>Lyrics</h4>
+				<p>[Lyrics coming soon]</p>
+			</div>
+			<div class="video-section">
+				<h4>Music Video / Live Performance</h4>
+				<iframe width="560" height="315" src="https://www.youtube.com/embed/_UzDPJE9WRQ" frameborder="0" allowfullscreen></iframe>
+			</div>
+		</div>
+	</details>
+
+	<!-- Track 5: Just Because -->
+	<details class="album-song">
+		<summary>
+			<div class="song-header-info">
+				<span class="song-title"><span class="song-num">05.</span> Just Because <img src="albumcover.jpg" class="album-icon" title="Main Album Track" /></span>
+				<span class="song-bpm">BPM: </span>
+				<div class="song-player" onclick="event.stopPropagation();">
+					<audio controls src="05_Just_Because.mp3"></audio>
+				</div>
+			</div>
+		</summary>
+		<div class="details-content">
+			<strong>Recorded Versions (Newest First):</strong>
+			<ul class="version-list">
+				<li class="version-item"><span>Main Album Version (2013)</span> <audio controls src="05_Just_Because.mp3"></audio></li>
+			</ul>
+			<div class="lyrics-section">
+				<h4>Lyrics</h4>
+				<p>[Lyrics coming soon]</p>
+			</div>
+		</div>
+	</details>
+
+	<!-- Track 6: Almond Roca -->
+	<details class="album-song">
+		<summary>
+			<div class="song-header-info">
+				<span class="song-title"><span class="song-num">06.</span> Almond Roca <img src="albumcover.jpg" class="album-icon" title="Main Album Track" /></span>
+				<span class="song-bpm">BPM: 193</span>
+				<div class="song-player" onclick="event.stopPropagation();">
+					<audio controls src="06_Almond_Roca.mp3"></audio>
+				</div>
+			</div>
+		</summary>
+		<div class="details-content">
+			<strong>Recorded Versions (Newest First):</strong>
+			<ul class="version-list">
+				<li class="version-item"><span>Practice (2013.06.25)</span> <audio controls src="other/2013.06.25_Practice/02_Almond_Roca.mp3"></audio></li>
+				<li class="version-item"><span>Homestead Lanes Live (2013.03.24)</span> <audio controls src="other/20130324_HomestedLanes/01_Almond_Roca.mp3"></audio></li>
+				<li class="version-item"><span>Main Album Version (2013)</span> <audio controls src="06_Almond_Roca.mp3"></audio></li>
+				<li class="version-item"><span>Arlene Francis Center Live (2012.07.27)</span> <audio controls src="other/20120727_ArleneFrancisCenter/10_Almond_Roca.mp3"></audio></li>
+				<li class="version-item"><span>Trinity Gold Media Live (2011.10.14)</span> <audio controls src="other/20111014_TrinityGoldMedia/01_Almond_Roca.mp3"></audio></li>
+			</ul>
+			<div class="lyrics-section">
+				<h4>Lyrics</h4>
+				<p>[Lyrics coming soon]</p>
+			</div>
+			<div class="video-section">
+				<h4>Music Video / Live Performance</h4>
+				<iframe width="560" height="315" src="https://www.youtube.com/embed/sxcrZgxsMxY" frameborder="0" allowfullscreen></iframe>
+			</div>
+		</div>
+	</details>
+
+	<!-- Track 7: Hell of a Way to Die -->
+	<details class="album-song">
+		<summary>
+			<div class="song-header-info">
+				<span class="song-title"><span class="song-num">07.</span> Hell of a Way to Die <img src="albumcover.jpg" class="album-icon" title="Main Album Track" /></span>
+				<span class="song-bpm">BPM: 173</span>
+				<div class="song-player" onclick="event.stopPropagation();">
+					<audio controls src="07_Hell_of_a_Way_to Die.mp3"></audio>
+				</div>
+			</div>
+		</summary>
+		<div class="details-content">
+			<strong>Recorded Versions (Newest First):</strong>
+			<ul class="version-list">
+				<li class="version-item"><span>Practice (2013.06.25)</span> <audio controls src="other/2013.06.25_Practice/04_Hell_Of_a_Way_to_Die.mp3"></audio></li>
+				<li class="version-item"><span>Homestead Lanes Live (2013.03.24)</span> <audio controls src="other/20130324_HomestedLanes/03_Hell_of_a_Way_to_Die.mp3"></audio></li>
+				<li class="version-item"><span>Main Album Version (2013)</span> <audio controls src="07_Hell_of_a_Way_to Die.mp3"></audio></li>
+				<li class="version-item"><span>Arlene Francis Center Live (2012.07.27)</span> <audio controls src="other/20120727_ArleneFrancisCenter/01_Hell_of_a_Way_to_Die.mp3"></audio></li>
+				<li class="version-item"><span>Trinity Gold Media Live (2011.10.14)</span> <audio controls src="other/20111014_TrinityGoldMedia/02_Hell_of_a_Way_to_Die.mp3"></audio></li>
+			</ul>
+			<div class="lyrics-section">
+				<h4>Lyrics</h4>
+				<p>[Lyrics coming soon]</p>
+			</div>
+			<div class="video-section">
+				<h4>Music Video / Live Performance</h4>
+				<iframe width="560" height="315" src="https://www.youtube.com/embed/FTMUG1agbLI" frameborder="0" allowfullscreen></iframe>
+			</div>
+		</div>
+	</details>
+
+	<!-- Track 8: The Devils Casino -->
+	<details class="album-song">
+		<summary>
+			<div class="song-header-info">
+				<span class="song-title"><span class="song-num">08.</span> The Devils Casino <img src="albumcover.jpg" class="album-icon" title="Main Album Track" /></span>
+				<span class="song-bpm">BPM: 144</span>
+				<div class="song-player" onclick="event.stopPropagation();">
+					<audio controls src="08_The_Devils_Casino.mp3"></audio>
+				</div>
+			</div>
+		</summary>
+		<div class="details-content">
+			<strong>Recorded Versions (Newest First):</strong>
+			<ul class="version-list">
+				<li class="version-item"><span>Main Album Version (2013)</span> <audio controls src="08_The_Devils_Casino.mp3"></audio></li>
+			</ul>
+			<div class="lyrics-section">
+				<h4>Lyrics</h4>
+				<p>[Lyrics coming soon]</p>
+			</div>
+		</div>
+	</details>
+
+	<!-- Track 9: The Demon Within -->
+	<details class="album-song">
+		<summary>
+			<div class="song-header-info">
+				<span class="song-title"><span class="song-num">09.</span> The Demon Within <img src="albumcover.jpg" class="album-icon" title="Main Album Track" /></span>
+				<span class="song-bpm">BPM: 161</span>
+				<div class="song-player" onclick="event.stopPropagation();">
+					<audio controls src="09_The_Demon_Within.mp3"></audio>
+				</div>
+			</div>
+		</summary>
+		<div class="details-content">
+			<strong>Recorded Versions (Newest First):</strong>
+			<ul class="version-list">
+				<li class="version-item"><span>Main Album Version (2013)</span> <audio controls src="09_The_Demon_Within.mp3"></audio></li>
+				<li class="version-item"><span>Trinity Gold Media Live (2011.10.14)</span> <audio controls src="other/20111014_TrinityGoldMedia/07_The_Demon_Within.mp3"></audio></li>
+			</ul>
+			<div class="lyrics-section">
+				<h4>Lyrics</h4>
+				<p>[Lyrics coming soon]</p>
+			</div>
+		</div>
+	</details>
+
+</div>
+
+<br class="clear" />
+<hr />
+<div class="back-link">
+	<a href="index.html">&larr; Back to Main Album Page</a>
+</div>
+
+</body>
+</html>
