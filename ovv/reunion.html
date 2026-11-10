@@ -43,6 +43,21 @@
 		.filter-buttons button { background: #f0f0f0; border: 1px solid #ccc; padding: 8px 14px; border-radius: 4px; cursor: pointer; font-size: 14px; font-weight: bold; color: #444; }
 		.filter-buttons button:hover { background: #e2e2e2; }
 		.filter-buttons button.active { background: #d0e0ff; border-color: #0066cc; color: #004488; }
+		/* Dark Mode Styles */
+		body.dark-mode { background-color: #121212; color: #e0e0e0; }
+		body.dark-mode a { color: #63b3ed; }
+		body.dark-mode a:hover { color: #90cdf4; }
+		body.dark-mode h2 { border-bottom-color: #333; }
+		body.dark-mode hr { border-color: #333; }
+		body.dark-mode details { background: #1e1e1e; border-color: #333; }
+		body.dark-mode .details-content { border-top-color: #333; }
+		body.dark-mode .version-item { background: #2a2a2a; border-color: #444; color: #ddd; }
+		body.dark-mode .lyrics-section { background: #2a2a2a; border-color: #444; color: #ccc; }
+		body.dark-mode .lyrics-section h4 { color: #fff; }
+		body.dark-mode .song-bpm, body.dark-mode .song-num { color: #aaa; }
+		body.dark-mode .filter-buttons button { background: #2a2a2a; border-color: #555; color: #ddd; }
+		body.dark-mode .filter-buttons button:hover { background: #3a3a3a; }
+		body.dark-mode .filter-buttons button.active { background: #1a365d; border-color: #63b3ed; color: #90cdf4; }
 	</style>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <script>
@@ -134,12 +149,34 @@
 		});
 	}
 
+	function toggleDarkMode() {
+		const body = document.body;
+		body.classList.toggle('dark-mode');
+		const btn = document.getElementById('dark-mode-btn');
+		if (body.classList.contains('dark-mode')) {
+			btn.textContent = '☀️ Light Mode';
+			localStorage.setItem('ovv_theme', 'dark');
+		} else {
+			btn.textContent = '🌙 Dark Mode';
+			localStorage.setItem('ovv_theme', 'light');
+		}
+	}
+
 	window.addEventListener('DOMContentLoaded', () => {
+		const savedTheme = localStorage.getItem('ovv_theme');
+		const btn = document.getElementById('dark-mode-btn');
+		if (savedTheme === 'light') {
+			document.body.classList.remove('dark-mode');
+			if (btn) btn.textContent = '🌙 Dark Mode';
+		} else {
+			document.body.classList.add('dark-mode');
+			if (btn) btn.textContent = '☀️ Light Mode';
+		}
 		filterSongs('all');
 	});
 </script>
 </head>
-<body>
+<body class="dark-mode">
 <div class="back-link">
 <a href="index.html">← Back to Main Album Page</a>
 </div>
@@ -150,6 +187,7 @@
 <button onclick="filterSongs('album-only', this)">Show Album Songs Only</button>
 <button onclick="filterSongs('all', this)">Show All</button>
 <button id="sort-track-btn" onclick="toggleSort()" style="display: none;">Sort by Track Order</button>
+<button id="dark-mode-btn" onclick="toggleDarkMode()">☀️ Light Mode</button>
 </div>
 <hr/>
 <!-- CONTAINER 1: ALPHABETICAL ORDER -->
